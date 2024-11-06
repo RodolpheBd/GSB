@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
-import '../styles/ColorStyles.dart';
+import 'color_styles.dart';
 
 class TextStyles {
     // Style pour les en-têtes
     static const TextStyle header = TextStyle(
       fontSize: 32,
-      fontWeight: FontWeight.bold,
-      color: ColorStyles.secondaryColor,
+      fontWeight: FontWeight.w700,
+      color: ColorStyles.blackColor,
       fontFamily: 'Montserrat',
     );
 
     // Style pour les titres
     static const TextStyle firstTitle = TextStyle(
       fontSize: 30,
-      fontWeight: FontWeight.bold,
-      color: ColorStyles.secondaryColor,
+      fontWeight: FontWeight.w700,
+      color: ColorStyles.blackColor,
       fontFamily: 'JetBrainsMono',
     );
 
     // Style pour les textes
     static const TextStyle body = TextStyle(
       fontSize: 18,
-      fontWeight: FontWeight.normal,
-      color: ColorStyles.secondaryColor,
+      fontWeight: FontWeight.w400,
+      color: ColorStyles.blackColor,
       fontFamily: 'JetBrainsMono',
     );
 
@@ -30,8 +30,8 @@ class TextStyles {
     static TextStyle bodyBold(bool isBlackBackground) {
     return TextStyle(
       fontSize: 18,
-      fontWeight: FontWeight.bold,
-      color: isBlackBackground ? ColorStyles.primaryColor : ColorStyles.secondaryColor,
+      fontWeight: FontWeight.w700,
+      color: isBlackBackground ? ColorStyles.whiteColor : ColorStyles.blackColor,
       fontFamily: 'JetBrainsMono',
     );
   }
