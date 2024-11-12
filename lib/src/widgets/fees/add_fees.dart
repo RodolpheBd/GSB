@@ -15,6 +15,7 @@ class AddFees extends StatefulWidget {
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _AddFeesState createState() => _AddFeesState();
 }
 
@@ -51,17 +52,29 @@ class _AddFeesState extends State<AddFees> {
             const SizedBox(height: AppDimensions.gapSmall),
             GestureDetector(
               onTap: () {
-                openCalendarDialog(
+                showDialog(
                   context: context,
-                  selectedDay: _selectedDay,
-                  focusedDay: _focusedDay,
-                  onDateSelected: (selectedDate) {
-                    setState(() {
-                      _selectedDay = selectedDate;
-                      _focusedDay = selectedDate;
-                    });
-                    _dateController.text =
-                        "${_selectedDay.toLocal()}".split(' ')[0];
+                  builder: (BuildContext context) {
+                    return Dialog(
+                      backgroundColor: ColorStyles.whiteColor,
+                      child: SizedBox(
+                        width: AppDimensions.widgetWidth,
+                        height: AppDimensions.widgetLargeHeight,
+                        child: CustomCalendar(
+                          selectedDay: _selectedDay,
+                          focusedDay: _focusedDay,
+                          onDateSelected: (selectedDate) {
+                            setState(() {
+                              _selectedDay = selectedDate;
+                              _focusedDay = selectedDate;
+                            });
+                            _dateController.text =
+                                "${_selectedDay.toLocal()}".split(' ')[0];
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ),
+                    );
                   },
                 );
               },

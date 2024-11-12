@@ -1,7 +1,7 @@
 name: gsb
 description: "A new Flutter project."
 
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+1
 
@@ -25,13 +25,14 @@ flutter:
 
   assets:
     - lib/src/common/assets/icons/
-  
+
   fonts:
     - family: Montserrat
       fonts:
         - asset: lib/src/common/assets/fonts/Montserrat/Montserrat-Bold.ttf
-        
+        - asset: lib/src/common/assets/fonts/Montserrat/Montserrat-Regular.ttf
+
     - family: JetBrainsMono
       fonts:
-        - asset: lib/src/common/assets/fonts/JetBrainsMono/JetBrainsMono-Regular.ttf
         - asset: lib/src/common/assets/fonts/JetBrainsMono/JetBrainsMono-Bold.ttf
+        - asset: lib/src/common/assets/fonts/JetBrainsMono/JetBrainsMono-Regular.ttf
