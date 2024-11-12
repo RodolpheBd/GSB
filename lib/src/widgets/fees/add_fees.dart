@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gsb/src/widgets/widgets.dart';
 import 'package:gsb/src/common/common.dart';
 
-class AddFees extends StatelessWidget {
+class AddFees extends StatefulWidget {
   final String title;
   final String icon;
   final String textInput;
@@ -15,6 +15,15 @@ class AddFees extends StatelessWidget {
   });
 
   @override
+  _AddFeesState createState() => _AddFeesState();
+}
+
+class _AddFeesState extends State<AddFees> {
+  DateTime _selectedDay = DateTime.now();
+  DateTime _focusedDay = DateTime.now();
+  final TextEditingController _dateController = TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -25,36 +34,59 @@ class AddFees extends StatelessWidget {
           },
         ),
         title: Text(
-          title,
+          widget.title,
           style: TextStyles.header,
         ),
         centerTitle: true,
       ),
-      backgroundColor: ColorStyles.whiteColor,
       body: Center(
         child: Column(
           children: [
             const SizedBox(height: AppDimensions.gapMedium),
             CustomCard(
-              icon: icon,
+              icon: widget.icon,
               height: AppDimensions.widgetMediumHeight,
               width: AppDimensions.widgetWidth,
             ),
             const SizedBox(height: AppDimensions.gapSmall),
+            GestureDetector(
+              onTap: () {
+                openCalendarDialog(
+                  context: context,
+                  selectedDay: _selectedDay,
+                  focusedDay: _focusedDay,
+                  onDateSelected: (selectedDate) {
+                    setState(() {
+                      _selectedDay = selectedDate;
+                      _focusedDay = selectedDate;
+                    });
+                    _dateController.text =
+                        "${_selectedDay.toLocal()}".split(' ')[0];
+                  },
+                );
+              },
+              child: AbsorbPointer(
+                child: CustomTextInput(
+                  controller: _dateController,
+                  placeholder: "Saisir la date",
+                ),
+              ),
+            ),
+            const SizedBox(height: AppDimensions.gapSmall),
             CustomTextInput(
-              placeholder: textInput,
+              placeholder: widget.textInput,
             ),
             const SizedBox(height: AppDimensions.gapSmall),
             CustomButton(
               text: 'Télécharger une image',
               isBlackBackground: true,
-              onPressed: () => (),
+              onPressed: () => (/* ton code ici */),
             ),
             const SizedBox(height: AppDimensions.gapSmall),
             CustomButton(
               text: 'Valider',
               isBlackBackground: true,
-              onPressed: () => (),
+              onPressed: () => (/* ton code ici */),
             ),
           ],
         ),

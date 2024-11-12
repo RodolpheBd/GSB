@@ -15,9 +15,11 @@ class AppDimensions {
   static const double widgetWidth = 310.0;
   static const double widgetSmallHeight = 50.0;
   static const double widgetMediumHeight = 250.0;
-  static const double widgetLargeHeight = 500.0;
+  static const double widgetLargeHeight = 350.0;
+  static const double widgetExtraLargeHeight = 500.0;
 
   // Icon sizes
+  
   // static const double iconSmall = 0;
   static const double iconMedium = 200.0;
   static const double iconLarge = 250.0;

@@ -10,7 +10,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorStyles.whiteColor,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.only(top: AppDimensions.paddingTop),
@@ -26,7 +25,7 @@ class HomeScreen extends StatelessWidget {
                   CustomCard(
                     icon: AppIcons.car,
                     text: 'Déplacements',
-                    height: AppDimensions.widgetLargeHeight,
+                    height: AppDimensions.widgetExtraLargeHeight,
                     width: AppDimensions.widgetWidth,
                     onPressed: () => Navigator.pushReplacement(
                       context,
@@ -37,7 +36,7 @@ class HomeScreen extends StatelessWidget {
                   CustomCard(
                     icon: AppIcons.catering,
                     text: 'Restaurations',
-                    height: AppDimensions.widgetLargeHeight,
+                    height: AppDimensions.widgetExtraLargeHeight,
                     width: AppDimensions.widgetWidth,
                     onPressed: () => Navigator.pushReplacement(
                       context,
@@ -48,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                   CustomCard(
                     icon: AppIcons.hotel,
                     text: 'Hébergements',
-                    height: AppDimensions.widgetLargeHeight,
+                    height: AppDimensions.widgetExtraLargeHeight,
                     width: AppDimensions.widgetWidth,
                     onPressed: () => Navigator.pushReplacement(
                       context,
@@ -59,7 +58,7 @@ class HomeScreen extends StatelessWidget {
                   CustomCard(
                     icon: AppIcons.coffee,
                     text: 'Cafés',
-                    height: AppDimensions.widgetLargeHeight,
+                    height: AppDimensions.widgetExtraLargeHeight,
                     width: AppDimensions.widgetWidth,
                     onPressed: () => Navigator.pushReplacement(
                       context,
@@ -69,7 +68,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
                 options: CarouselOptions(
-                  height: AppDimensions.widgetLargeHeight,
+                  height: AppDimensions.widgetExtraLargeHeight,
                   enlargeCenterPage: true,
                   aspectRatio: 16 / 9,
                   autoPlay: false,

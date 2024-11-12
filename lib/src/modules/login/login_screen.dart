@@ -9,7 +9,6 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorStyles.whiteColor,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.only(top: AppDimensions.paddingTop),

@@ -3,10 +3,12 @@ import 'package:gsb/src/common/common.dart';
 
 class CustomTextInput extends StatelessWidget {
   final String placeholder;
+  final TextEditingController? controller;
 
   const CustomTextInput({
     super.key, 
-    required this.placeholder,
+    required this.placeholder, 
+    this.controller
   });
 
   @override
@@ -17,6 +19,7 @@ class CustomTextInput extends StatelessWidget {
           height: AppDimensions.widgetSmallHeight,
           width: AppDimensions.widgetWidth,
           child: TextField(
+            controller: controller,
             decoration: InputDecoration(
               hintText: placeholder,
               hintStyle: TextStyles.body,
