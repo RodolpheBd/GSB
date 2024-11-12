@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gsb/src/modules/add_fees/car_fees_screen.dart';
 import 'src/modules/login/login_screen.dart';
 
 void main() => runApp(const MyApp());
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'GSB',
-      home: LoginScreen(),
+      home: AddCarFeesScreen(),
     );
   }
 }

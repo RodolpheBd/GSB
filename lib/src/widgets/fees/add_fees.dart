@@ -16,38 +16,49 @@ class AddFees extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            title,
-            style: TextStyles.header,
-          ),
-          const SizedBox(height: AppDimensions.gapMedium),
-          CustomCard(
-            icon: icon,
-            height: AppDimensions.widgetMediumHeight,
-            width: AppDimensions.widgetSmallHeight,
-            
-          ),
-          const SizedBox(height: AppDimensions.gapSmall),
-          CustomTextInput(
-            placeholder: textInput,
-          ),
-          const SizedBox(height: AppDimensions.gapSmall),
-          CustomButton(
-            text: 'Télécharger une image',
-            isBlackBackground: true,
-            onPressed: () => (),
-          ),
-          const SizedBox(height: AppDimensions.gapSmall),
-          CustomButton(
-            text: 'Valider',
-            isBlackBackground: true,
-            onPressed: () => (),
-          ),
-        ],
-
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.chevron_left),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text(
+          title,
+          style: TextStyles.header,
+        ),
+        centerTitle: true,
+      ),
+      backgroundColor: ColorStyles.whiteColor,
+      body: Center(
+        child: Column(
+          children: [
+            const SizedBox(height: AppDimensions.gapMedium),
+            CustomCard(
+              icon: icon,
+              height: AppDimensions.widgetMediumHeight,
+              width: AppDimensions.widgetWidth,
+            ),
+            const SizedBox(height: AppDimensions.gapSmall),
+            CustomTextInput(
+              placeholder: textInput,
+            ),
+            const SizedBox(height: AppDimensions.gapSmall),
+            CustomButton(
+              text: 'Télécharger une image',
+              isBlackBackground: true,
+              onPressed: () => (),
+            ),
+            const SizedBox(height: AppDimensions.gapSmall),
+            CustomButton(
+              text: 'Valider',
+              isBlackBackground: true,
+              onPressed: () => (),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gsb/src/common/common.dart';
+import 'package:gsb/src/widgets/widgets.dart';
 
 class AddCateringFeesScreen extends StatelessWidget {
   const AddCateringFeesScreen({super.key});
@@ -6,8 +8,16 @@ class AddCateringFeesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorStyles.whiteColor,
       body: Center(
-        child: Text('Add Car Fees Screen'),
+        child: Padding(
+          padding: const EdgeInsets.only(top: AppDimensions.paddingTop),
+          child: AddFees(
+            title: 'Restauration',
+            icon: AppIcons.catering,
+            textInput: 'Saisir repas',
+          ),
+        ),
       ),
     );
   }
