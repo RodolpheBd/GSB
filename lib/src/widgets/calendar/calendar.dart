@@ -15,61 +15,45 @@ class CustomCalendar extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return TableCalendar(
-      firstDay: DateTime.utc(2020, 1, 1),
-      lastDay: DateTime.utc(2030, 12, 31),
-      focusedDay: focusedDay,
-      selectedDayPredicate: (day) => isSameDay(selectedDay, day),
-      onDaySelected: (selectedDay, focusedDay) {
-        onDateSelected(selectedDay);
-      },
-      availableCalendarFormats: const {
-        CalendarFormat.month: 'Month',
-      },
-      headerStyle: _buildHeaderStyle(),
-      calendarStyle: _buildCalendarStyle(),
-      daysOfWeekStyle: _buildDaysOfWeekStyle(),
-    );
-  }
+  Widget build(BuildContext context) => TableCalendar(
+        firstDay: DateTime.utc(2020, 1, 1),
+        lastDay: DateTime.utc(2030, 12, 31),
+        focusedDay: focusedDay,
+        selectedDayPredicate: (day) => isSameDay(selectedDay, day),
+        onDaySelected: (selectedDay, focusedDay) => onDateSelected(selectedDay),
+        availableCalendarFormats: const {CalendarFormat.month: 'Month'},
+        headerStyle: _headerStyle(),
+        calendarStyle: _calendarStyle(),
+        daysOfWeekStyle: _daysOfWeekStyle(),
+      );
 
-  HeaderStyle _buildHeaderStyle() {
-    return HeaderStyle(
-      titleCentered: true,
-      titleTextStyle: TextStyles.headerCalendar,
-      leftChevronIcon: Icon(Icons.chevron_left),
-      rightChevronIcon: Icon(Icons.chevron_right),
-    );
-  }
+  HeaderStyle _headerStyle() => HeaderStyle(
+        titleCentered: true,
+        titleTextStyle: TextStyles.headerCalendar,
+        leftChevronIcon: const Icon(Icons.chevron_left),
+        rightChevronIcon: const Icon(Icons.chevron_right),
+      );
 
-  CalendarStyle _buildCalendarStyle() {
-    return CalendarStyle(
-      defaultTextStyle: TextStyles.bodyCalendar,
-      selectedDecoration: BoxDecoration(
-        color: ColorStyles.blackColor,
-        shape: BoxShape.circle,
-      ),
-      selectedTextStyle: TextStyle(
-        color: ColorStyles.whiteColor,
-      ),
-      todayDecoration: BoxDecoration(
-        color: Colors.transparent,
-        border: Border.all(
+  CalendarStyle _calendarStyle() => CalendarStyle(
+        defaultTextStyle: TextStyles.bodyCalendar,
+        selectedDecoration: BoxDecoration(
           color: ColorStyles.blackColor,
-          width: AppDimensions.borderThickness,
+          shape: BoxShape.circle,
         ),
-        shape: BoxShape.circle,
-      ),
-      todayTextStyle: TextStyle(
-        color: ColorStyles.blackColor,
-      ),
-    );
-  }
+        selectedTextStyle: TextStyle(color: ColorStyles.whiteColor),
+        todayDecoration: BoxDecoration(
+          color: Colors.transparent,
+          border: Border.all(
+            color: ColorStyles.blackColor,
+            width: AppDimensions.borderThickness,
+          ),
+          shape: BoxShape.circle,
+        ),
+        todayTextStyle: TextStyle(color: ColorStyles.blackColor),
+      );
 
-  DaysOfWeekStyle _buildDaysOfWeekStyle() {
-    return DaysOfWeekStyle(
-      weekdayStyle: TextStyles.titleCalendar,
-      weekendStyle: TextStyles.titleCalendar,
-    );
-  }
+  DaysOfWeekStyle _daysOfWeekStyle() => DaysOfWeekStyle(
+        weekdayStyle: TextStyles.titleCalendar,
+        weekendStyle: TextStyles.titleCalendar,
+      );
 }

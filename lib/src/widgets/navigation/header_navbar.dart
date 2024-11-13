@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:gsb/src/common/common.dart';
 
 class HeaderNavBar extends StatelessWidget implements PreferredSizeWidget {
-  final bool showBackArrow;
   final String title;
+  final bool? showBackArrow;
 
   const HeaderNavBar({
     super.key,
-    this.showBackArrow = false,
     required this.title,
+    this.showBackArrow,
   });
 
   @override
@@ -16,22 +16,28 @@ class HeaderNavBar extends StatelessWidget implements PreferredSizeWidget {
         preferredSize: preferredSize,
         child: Padding(
           padding: EdgeInsets.only(top: AppDimensions.paddingTop),
-          child: AppBar(
-            leading: showBackArrow
-                ? IconButton(
-                    icon: const Icon(Icons.chevron_left),
-                    onPressed: () => Navigator.pop(context),
-                  )
-                : null,
-            title: Text(
-              title,
-              style: TextStyles.header,
+          child: Center(
+            child: AppBar(
+              leading: (showBackArrow ?? false)
+                  ? IconButton(
+                      icon: const Icon(
+                        Icons.chevron_left,
+                        size: AppDimensions.iconSmall,
+                      ),
+                      onPressed: () => Navigator.pop(context),
+                    )
+                  : null,
+              title: Text(
+                title,
+                style: TextStyles.header,
+              ),
+              centerTitle: true,
             ),
-            centerTitle: true,
           ),
         ),
       );
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight + AppDimensions.paddingTop);
+  Size get preferredSize =>
+      Size.fromHeight(kToolbarHeight + AppDimensions.paddingTop);
 }

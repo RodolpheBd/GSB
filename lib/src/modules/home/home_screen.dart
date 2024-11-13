@@ -76,7 +76,11 @@ class HomeScreen extends StatelessWidget {
               CustomButton(
                 text: 'Afficher les Frais',
                 isBlackBackground: true,
-                onPressed: () => (/* ton code ici */),
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ShowFeesScreen()),
+                ),
               ),
             ],
           ),

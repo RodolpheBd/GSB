@@ -3,5 +3,4 @@ class AppIcons {
   static const String hotel = 'lib/src/common/assets/icons/hotel.png';
   static const String catering = 'lib/src/common/assets/icons/catering.png';
   static const String coffee = 'lib/src/common/assets/icons/coffee.png';
-  static const String back = 'lib/src/common/assets/icons/back.png';
 }
