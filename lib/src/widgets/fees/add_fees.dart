@@ -1,6 +1,10 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gsb/src/widgets/widgets.dart';
 import 'package:gsb/src/common/common.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddFees extends StatefulWidget {
   final String title;
@@ -23,32 +27,52 @@ class _AddFeesState extends State<AddFees> {
   DateTime _selectedDay = DateTime.now();
   DateTime _focusedDay = DateTime.now();
   final TextEditingController _dateController = TextEditingController();
+  XFile? _image;
+
+  Future<void> _pickImage() async {
+    final ImagePicker _picker = ImagePicker();
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      setState(() {
+        _image = image;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.chevron_left),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Text(
-          widget.title,
-          style: TextStyles.header,
-        ),
-        centerTitle: true,
+      appBar: HeaderNavBar(
+        showBackArrow: true,
+        title: widget.title,
       ),
       body: Center(
         child: Column(
           children: [
             const SizedBox(height: AppDimensions.gapMedium),
-            CustomCard(
-              icon: widget.icon,
-              height: AppDimensions.widgetMediumHeight,
-              width: AppDimensions.widgetWidth,
-            ),
+            _image == null
+    ? CustomCard(
+        icon: widget.icon,
+        height: AppDimensions.widgetMediumHeight,
+        width: AppDimensions.widgetWidth,
+      )
+    : ClipRRect(
+        borderRadius: BorderRadius.circular(AppDimensions.borderRadiusMedium),
+        child: kIsWeb
+            ? Image.network(
+                _image!.path,
+                height: AppDimensions.widgetMediumHeight,
+                width: AppDimensions.widgetWidth,
+                fit: BoxFit.cover,
+              )
+            : Image.file(
+                File(_image!.path),
+                height: AppDimensions.widgetMediumHeight,
+                width: AppDimensions.widgetWidth,
+                fit: BoxFit.cover,
+              ),
+      ),
             const SizedBox(height: AppDimensions.gapSmall),
             GestureDetector(
               onTap: () {
@@ -93,7 +117,7 @@ class _AddFeesState extends State<AddFees> {
             CustomButton(
               text: 'Télécharger une image',
               isBlackBackground: true,
-              onPressed: () => (/* ton code ici */),
+              onPressed: _pickImage,
             ),
             const SizedBox(height: AppDimensions.gapSmall),
             CustomButton(

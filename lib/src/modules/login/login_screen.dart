@@ -7,36 +7,29 @@ class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.only(top: AppDimensions.paddingTop),
+  Widget build(BuildContext context) => Scaffold(
+        appBar: const HeaderNavBar(title: 'Login'),
+        body: Center(
           child: Column(
             children: [
-              const Text(
-                'Login',
-                style: TextStyles.header,
-              ),
               const SizedBox(height: AppDimensions.gapMedium),
               const CustomTextInput(placeholder: 'Saisir utilisateur'),
               const SizedBox(height: AppDimensions.gapSmall),
-              const CustomTextInput(placeholder: 'Saisir mot de passe'),
+              const CustomTextInput(
+                placeholder: 'Saisir mot de passe',
+                obscureText: true,
+              ),
               const SizedBox(height: AppDimensions.gapSmall),
               CustomButton(
                 text: 'Login',
                 isBlackBackground: true,
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomeScreen()),
-                  );
-                },
+                onPressed: () => Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                ),
               ),
             ],
           ),
         ),
-      ),
-    );
-  }
+      );
 }

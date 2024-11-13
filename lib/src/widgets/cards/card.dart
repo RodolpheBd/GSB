@@ -18,35 +18,43 @@ class CustomCard extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed, // Ajout de l'interaction
-      child: Container(
-        height: height,
-        width: width,
-        decoration: BoxDecoration(
-          color: ColorStyles.blackColor,
-          borderRadius: BorderRadius.circular(AppDimensions.borderRadiusMedium),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              icon,
-              height: text != null ? AppDimensions.iconLarge : AppDimensions.iconMedium,
-              width: text != null ? AppDimensions.iconLarge : AppDimensions.iconMedium,
-              fit: BoxFit.contain,
-            ),
-            const SizedBox(height: AppDimensions.gapSmall),
-            if (text != null)
-              Text(
-                text!,
-                style: TextStyles.firstTitle.copyWith(color: ColorStyles.whiteColor),
+  Widget build(BuildContext context) => GestureDetector(
+        onTap: onPressed ?? () => {},
+        child: Container(
+          height: height,
+          width: width,
+          decoration: BoxDecoration(
+            color: ColorStyles.blackColor,
+            borderRadius:
+                BorderRadius.circular(AppDimensions.borderRadiusMedium),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                icon,
+                height: text != null
+                    ? AppDimensions.iconLarge
+                    : AppDimensions.iconMedium,
+                width: text != null
+                    ? AppDimensions.iconLarge
+                    : AppDimensions.iconMedium,
+                fit: BoxFit.contain,
               ),
-          ],
+              text != null
+                  ? Column(
+                      children: [
+                        const SizedBox(height: AppDimensions.gapSmall),
+                        Text(
+                          text!,
+                          style: TextStyles.firstTitle
+                              .copyWith(color: ColorStyles.whiteColor),
+                        ),
+                      ],
+                    )
+                  : const SizedBox(),
+            ],
+          ),
         ),
-      ),
-    );
-  }
+      );
 }

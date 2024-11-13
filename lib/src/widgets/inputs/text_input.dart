@@ -4,44 +4,43 @@ import 'package:gsb/src/common/common.dart';
 class CustomTextInput extends StatelessWidget {
   final String placeholder;
   final TextEditingController? controller;
+  final bool? obscureText;
 
   const CustomTextInput({
-    super.key, 
-    required this.placeholder, 
-    this.controller
+    super.key,
+    required this.placeholder,
+    this.controller,
+    this.obscureText,
   });
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: AppDimensions.widgetSmallHeight,
-          width: AppDimensions.widgetWidth,
-          child: TextField(
-            controller: controller,
-            decoration: InputDecoration(
-              hintText: placeholder,
-              hintStyle: TextStyles.body,
-              enabledBorder: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(AppDimensions.borderRadiusSmall)),
-                borderSide: BorderSide(
-                  color: ColorStyles.blackColor,
-                  width: AppDimensions.borderThickness,
-                ),
+  Widget build(BuildContext context) => SizedBox(
+        height: AppDimensions.widgetSmallHeight,
+        width: AppDimensions.widgetWidth,
+        child: TextField(
+          controller: controller,
+          obscureText: obscureText ?? false,
+          decoration: InputDecoration(
+            hintText: placeholder,
+            hintStyle: TextStyles.body,
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: ColorStyles.blackColor,
+                width: AppDimensions.borderThickness,
               ),
-              focusedBorder: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(AppDimensions.borderRadiusSmall)),
-                borderSide: BorderSide(
-                  color: ColorStyles.blackColor, 
-                  width: AppDimensions.borderThickness,
-                ),
-              ),
+              borderRadius:
+                  BorderRadius.circular(AppDimensions.borderRadiusSmall),
             ),
-            style: TextStyles.body
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: ColorStyles.blackColor,
+                width: AppDimensions.borderThickness,
+              ),
+              borderRadius:
+                  BorderRadius.circular(AppDimensions.borderRadiusSmall),
+            ),
           ),
+          style: TextStyles.body,
         ),
-      ],
-    );
-  }
+      );
 }

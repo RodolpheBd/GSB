@@ -8,18 +8,16 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'GSB',
-      theme: ThemeData(
-        primaryColor: ColorStyles.whiteColor,
-        scaffoldBackgroundColor: ColorStyles.whiteColor,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: ColorStyles.whiteColor,
+  Widget build(BuildContext context) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'GSB',
+        theme: ThemeData(
+          primaryColor: ColorStyles.whiteColor,
+          scaffoldBackgroundColor: ColorStyles.whiteColor,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: ColorStyles.whiteColor,
+          ),
         ),
-      ),
-      home: const AddCarFeesScreen(),
-    );
-  }
+        home: const LoginScreen(),
+      );
 }

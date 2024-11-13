@@ -8,17 +8,11 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.only(top: AppDimensions.paddingTop),
+  Widget build(BuildContext context) => Scaffold(
+        appBar: HeaderNavBar(title: 'Suivi de vos Frais'),
+        body: Center(
           child: Column(
             children: [
-              const Text(
-                'Suivi de vos Frais',
-                style: TextStyles.header,
-              ),
               const SizedBox(height: AppDimensions.gapMedium),
               CarouselSlider(
                 items: [
@@ -27,7 +21,7 @@ class HomeScreen extends StatelessWidget {
                     text: 'Déplacements',
                     height: AppDimensions.widgetExtraLargeHeight,
                     width: AppDimensions.widgetWidth,
-                    onPressed: () => Navigator.pushReplacement(
+                    onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const AddCarFeesScreen()),
@@ -38,7 +32,7 @@ class HomeScreen extends StatelessWidget {
                     text: 'Restaurations',
                     height: AppDimensions.widgetExtraLargeHeight,
                     width: AppDimensions.widgetWidth,
-                    onPressed: () => Navigator.pushReplacement(
+                    onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const AddCateringFeesScreen()),
@@ -49,7 +43,7 @@ class HomeScreen extends StatelessWidget {
                     text: 'Hébergements',
                     height: AppDimensions.widgetExtraLargeHeight,
                     width: AppDimensions.widgetWidth,
-                    onPressed: () => Navigator.pushReplacement(
+                    onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const AddHotelFeesScreen()),
@@ -60,7 +54,7 @@ class HomeScreen extends StatelessWidget {
                     text: 'Cafés',
                     height: AppDimensions.widgetExtraLargeHeight,
                     width: AppDimensions.widgetWidth,
-                    onPressed: () => Navigator.pushReplacement(
+                    onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const AddCoffeeFeesScreen()),
@@ -82,12 +76,10 @@ class HomeScreen extends StatelessWidget {
               CustomButton(
                 text: 'Afficher les Frais',
                 isBlackBackground: true,
-                onPressed: () => (),
+                onPressed: () => (/* ton code ici */),
               ),
             ],
           ),
         ),
-      ),
-    );
-  }
+      );
 }

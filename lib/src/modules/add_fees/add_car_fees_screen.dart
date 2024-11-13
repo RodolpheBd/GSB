@@ -6,18 +6,13 @@ class AddCarFeesScreen extends StatelessWidget {
   const AddCarFeesScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.only(top: AppDimensions.paddingTop),
+  Widget build(BuildContext context) => Scaffold(
+        body: Center(
           child: AddFees(
             title: 'Déplacement',
             icon: AppIcons.car,
             textInput: 'Saisir km(s)',
           ),
         ),
-      ),
-    );
-  }
+      );
 }

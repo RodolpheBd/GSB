@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'color_styles.dart';
 
 class TextStyles {
-  // Style pour les en-têtes
+  // Style for headers
   static const TextStyle header = TextStyle(
     fontSize: 32,
     fontWeight: FontWeight.w700,
@@ -10,7 +10,7 @@ class TextStyles {
     fontFamily: 'Montserrat',
   );
 
-  // Style pour les titres
+  // Style for titles
   static const TextStyle firstTitle = TextStyle(
     fontSize: 30,
     fontWeight: FontWeight.w700,
@@ -18,7 +18,7 @@ class TextStyles {
     fontFamily: 'JetBrainsMono',
   );
 
-  // Style pour les textes
+  // Style for body text
   static const TextStyle body = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w400,
@@ -26,7 +26,7 @@ class TextStyles {
     fontFamily: 'JetBrainsMono',
   );
 
-  // Style pour les textes en gras
+  // Style for bold text
   static TextStyle bodyBold(bool isBlackBackground) {
     return TextStyle(
       fontSize: 18,
@@ -37,7 +37,7 @@ class TextStyles {
     );
   }
 
-  // Style pour les calendriers
+  // Style for calendar
   static const TextStyle headerCalendar = TextStyle(
     fontWeight: FontWeight.w700,
     fontFamily: 'Montserrat',

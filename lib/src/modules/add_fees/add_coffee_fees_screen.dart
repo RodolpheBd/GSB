@@ -6,18 +6,13 @@ class AddCoffeeFeesScreen extends StatelessWidget {
   const AddCoffeeFeesScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.only(top: AppDimensions.paddingTop),
+  Widget build(BuildContext context) => Scaffold(
+        body: Center(
           child: AddFees(
             title: 'Café',
             icon: AppIcons.coffee,
             textInput: 'Saisir café(s)',
           ),
         ),
-      ),
-    );
-  }
+      );
 }

@@ -6,18 +6,13 @@ class AddCateringFeesScreen extends StatelessWidget {
   const AddCateringFeesScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.only(top: AppDimensions.paddingTop),
+  Widget build(BuildContext context) => Scaffold(
+        body: Center(
           child: AddFees(
             title: 'Restauration',
             icon: AppIcons.catering,
             textInput: 'Saisir repas',
           ),
         ),
-      ),
-    );
-  }
+      );
 }
