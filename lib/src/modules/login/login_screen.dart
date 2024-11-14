@@ -22,7 +22,6 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(height: AppDimensions.gapSmall),
               CustomButton(
                 text: 'Login',
-                isBlackBackground: true,
                 onPressed: () => Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => const HomeScreen()),

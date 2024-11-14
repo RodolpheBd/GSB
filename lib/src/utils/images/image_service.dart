@@ -10,13 +10,13 @@ class ImageService {
         child: kIsWeb
             ? Image.network(
                 image.path,
-                height: AppDimensions.widgetMediumHeight,
+                height: AppDimensions.widgetLargeHeight,
                 width: AppDimensions.widgetWidth,
                 fit: BoxFit.cover,
               )
             : Image.file(
                 File(image.path),
-                height: AppDimensions.widgetMediumHeight,
+                height: AppDimensions.widgetLargeHeight,
                 width: AppDimensions.widgetWidth,
                 fit: BoxFit.cover,
               ),

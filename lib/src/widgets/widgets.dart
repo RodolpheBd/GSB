@@ -1,5 +1,6 @@
 // Button
 export 'package:gsb/src/widgets/buttons/button.dart';
+export 'package:gsb/src/widgets/buttons/show_fees_button.dart';
 
 // TextInput
 export 'package:gsb/src/widgets/inputs/text_input.dart';

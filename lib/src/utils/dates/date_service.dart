@@ -18,7 +18,7 @@ class DateService {
           backgroundColor: ColorStyles.whiteColor,
           child: SizedBox(
             width: AppDimensions.widgetWidth,
-            height: AppDimensions.widgetLargeHeight,
+            height: AppDimensions.calendarHeight,
             child: CustomCalendar(
               selectedDay: selectedDay,
               focusedDay: focusedDay,

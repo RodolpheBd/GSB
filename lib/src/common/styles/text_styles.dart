@@ -26,16 +26,12 @@ class TextStyles {
     fontFamily: 'JetBrainsMono',
   );
 
-  // Style for bold text
-  static TextStyle bodyBold(bool isBlackBackground) {
-    return TextStyle(
-      fontSize: 18,
-      fontWeight: FontWeight.w700,
-      color:
-          isBlackBackground ? ColorStyles.whiteColor : ColorStyles.blackColor,
-      fontFamily: 'JetBrainsMono',
-    );
-  }
+  static const TextStyle bodyBold = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w700,
+    color: ColorStyles.blackColor,
+    fontFamily: 'JetBrainsMono',
+  );
 
   // Style for calendar
   static const TextStyle headerCalendar = TextStyle(

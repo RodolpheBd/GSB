@@ -13,13 +13,17 @@ class AppDimensions {
 
   // Widgets dimensions
   static const double widgetWidth = 310.0;
+
   static const double widgetSmallHeight = 50.0;
-  static const double widgetMediumHeight = 250.0;
-  static const double widgetLargeHeight = 350.0;
+  static const double widgetMediumHeight = 75.0;
+  static const double widgetLargeHeight = 250.0;
   static const double widgetExtraLargeHeight = 450.0;
 
   // Icon sizes
   static const double iconSmall = 40.0;
   static const double iconMedium = 200.0;
   static const double iconLarge = 250.0;
+
+  // Calendar dimensions
+  static const double calendarHeight = 350.0;
 }

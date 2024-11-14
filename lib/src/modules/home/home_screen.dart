@@ -75,7 +75,6 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(height: AppDimensions.gapSmall),
               CustomButton(
                 text: 'Afficher les Frais',
-                isBlackBackground: true,
                 onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(

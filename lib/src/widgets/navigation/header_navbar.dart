@@ -18,7 +18,7 @@ class HeaderNavBar extends StatelessWidget implements PreferredSizeWidget {
           padding: EdgeInsets.only(top: AppDimensions.paddingTop),
           child: Center(
             child: AppBar(
-              leading: (showBackArrow ?? false)
+              leading: showBackArrow ?? false
                   ? IconButton(
                       icon: const Icon(
                         Icons.chevron_left,

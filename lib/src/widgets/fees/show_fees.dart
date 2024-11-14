@@ -4,16 +4,22 @@ import 'package:gsb/src/utils/utils.dart';
 import 'package:gsb/src/widgets/widgets.dart';
 import 'package:gsb/src/common/common.dart';
 
-class AddFees extends StatefulWidget {
+class ShowFees extends StatefulWidget {
   final String title;
-  final String icon;
-  final String textInput;
+  final Image? receipt;
+  final String date;
+  final String number;
+  final String price;
+  final bool repay;
 
-  const AddFees({
+  const ShowFees({
     super.key,
     required this.title,
-    required this.icon,
-    required this.textInput,
+    this.receipt,
+    required this.date,
+    required this.number,
+    required this.price,
+    required this.repay,
   });
 
   @override
