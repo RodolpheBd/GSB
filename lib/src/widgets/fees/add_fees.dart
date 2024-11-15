@@ -59,7 +59,7 @@ class _AddFeesState extends State<AddFees> {
                 ),
                 child: AbsorbPointer(
                   child: CustomTextInput(
-                    controller: _dateController,
+                    value: _dateController,
                     placeholder: "Saisir date",
                   ),
                 ),

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'color_styles.dart';
 
 class TextStyles {
   // Style for headers
   static const TextStyle header = TextStyle(
     fontSize: 32,
     fontWeight: FontWeight.w700,
-    color: ColorStyles.blackColor,
     fontFamily: 'Montserrat',
   );
 
@@ -14,7 +12,6 @@ class TextStyles {
   static const TextStyle firstTitle = TextStyle(
     fontSize: 30,
     fontWeight: FontWeight.w700,
-    color: ColorStyles.blackColor,
     fontFamily: 'JetBrainsMono',
   );
 
@@ -22,14 +19,12 @@ class TextStyles {
   static const TextStyle body = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w400,
-    color: ColorStyles.blackColor,
     fontFamily: 'JetBrainsMono',
   );
 
   static const TextStyle bodyBold = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w700,
-    color: ColorStyles.blackColor,
     fontFamily: 'JetBrainsMono',
   );
 

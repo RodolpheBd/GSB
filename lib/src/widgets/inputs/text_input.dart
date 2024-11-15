@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:gsb/src/common/common.dart';
 
 class CustomTextInput extends StatelessWidget {
-  final String placeholder;
-  final TextEditingController? controller;
+  final String? placeholder;
+  final TextEditingController? value;
   final bool? obscureText;
 
   const CustomTextInput({
     super.key,
-    required this.placeholder,
-    this.controller,
+    this.placeholder,
+    this.value,
     this.obscureText,
   });
 
@@ -18,7 +18,7 @@ class CustomTextInput extends StatelessWidget {
         height: AppDimensions.widgetSmallHeight,
         width: AppDimensions.widgetWidth,
         child: TextField(
-          controller: controller,
+          controller: value,
           obscureText: obscureText ?? false,
           decoration: InputDecoration(
             hintText: placeholder,

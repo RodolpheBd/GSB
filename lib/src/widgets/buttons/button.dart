@@ -3,11 +3,13 @@ import 'package:gsb/src/common/common.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
+  final Color? textColor;
   final VoidCallback onPressed;
 
   const CustomButton({
     super.key,
     required this.text,
+    this.textColor,
     required this.onPressed,
   });
 
@@ -27,7 +29,7 @@ class CustomButton extends StatelessWidget {
           child: Text(
             text,
             style: TextStyles.bodyBold.copyWith(
-              color: ColorStyles.whiteColor,
+              color: textColor ?? ColorStyles.whiteColor,
             ),
           ),
         ),

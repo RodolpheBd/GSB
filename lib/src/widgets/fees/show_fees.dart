@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:gsb/src/utils/utils.dart';
 import 'package:gsb/src/widgets/widgets.dart';
 import 'package:gsb/src/common/common.dart';
 
-class ShowFees extends StatefulWidget {
+class ShowFees extends StatelessWidget {
   final String title;
-  final Image? receipt;
+  final Image? image;
   final String date;
   final String number;
   final String price;
@@ -15,7 +13,7 @@ class ShowFees extends StatefulWidget {
   const ShowFees({
     super.key,
     required this.title,
-    this.receipt,
+    this.image,
     required this.date,
     required this.number,
     required this.price,
@@ -23,73 +21,38 @@ class ShowFees extends StatefulWidget {
   });
 
   @override
-  // ignore: library_private_types_in_public_api
-  _AddFeesState createState() => _AddFeesState();
-}
-
-class _AddFeesState extends State<AddFees> {
-  final TextEditingController _dateController = TextEditingController();
-  XFile? _selectedImage;
-
-  Future<void> _pickImage() async =>
-      await ImagePicker().pickImage(source: ImageSource.gallery).then((image) =>
-          image != null ? setState(() => _selectedImage = image) : null);
-
-  @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: HeaderNavBar(
-          showBackArrow: true,
-          title: widget.title,
-        ),
-        body: Center(
+Widget build(BuildContext context) => Scaffold(
+      appBar: HeaderNavBar(
+        showBackArrow: true,
+        title: title,
+        backgroundColor: repay ? ColorStyles.greenColor : ColorStyles.redColor, 
+      ),
+      body: Container(
+        color: repay ? ColorStyles.greenColor : ColorStyles.redColor,
+        child: Center(
           child: Column(
             children: [
               const SizedBox(height: AppDimensions.gapMedium),
-              _selectedImage == null
-                  ? CustomCard(
-                      icon: widget.icon,
-                      height: AppDimensions.widgetLargeHeight,
-                      width: AppDimensions.widgetWidth,
-                      onPressed: () => _pickImage(),
-                    )
-                  : ImageService.displayImage(_selectedImage!),
+              image != null ? image! : const SizedBox(),
               const SizedBox(height: AppDimensions.gapSmall),
-              GestureDetector(
-                onTap: () => DateService.showDatePickerDialog(
-                  context,
-                  onDateSelected: (DateTime selectedDate) => {
-                    DateService.updateSelectedDate(
-                        selectedDate, _dateController),
-                    Navigator.of(context).pop(),
-                  },
-                ),
-                child: AbsorbPointer(
-                  child: CustomTextInput(
-                    controller: _dateController,
-                    placeholder: "Saisir date",
-                  ),
-                ),
+              CustomTextInput(
+                value: TextEditingController(text: date),
               ),
               const SizedBox(height: AppDimensions.gapSmall),
               CustomTextInput(
-                placeholder: widget.textInput,
+                value: TextEditingController(text: number),
               ),
               const SizedBox(height: AppDimensions.gapSmall),
               CustomTextInput(
-                placeholder: 'Saisir montant (H.T./F)',
+                value: TextEditingController(text: price),
               ),
               const SizedBox(height: AppDimensions.gapSmall),
-              CustomButton(
-                text: 'Télécharger une image',
-                onPressed: () => _pickImage(),
-              ),
+              CustomButton(text: 'Supprimer', textColor: repay ? ColorStyles.greenColor : ColorStyles.redColor,onPressed: () {}),
               const SizedBox(height: AppDimensions.gapSmall),
-              CustomButton(
-                text: 'Valider',
-                onPressed: () => {/* ton code ici */},
-              ),
+              CustomButton(text: 'Valider', textColor: repay ? ColorStyles.greenColor : ColorStyles.redColor, onPressed: () {}),
             ],
           ),
         ),
-      );
+      ),
+    );
 }

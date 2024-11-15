@@ -12,3 +12,4 @@ export 'package:gsb/src/modules/add_fees/add_coffee_fees_screen.dart';
 
 // Show Fees Screens
 export 'package:gsb/src/modules/show_fees/show_fees_screen.dart';
+export 'package:gsb/src/modules/show_fees/details_fees_screen.dart';

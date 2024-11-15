@@ -14,10 +14,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primaryColor: ColorStyles.whiteColor,
           scaffoldBackgroundColor: ColorStyles.whiteColor,
-          appBarTheme: const AppBarTheme(
-            backgroundColor: ColorStyles.whiteColor,
-          ),
         ),
-        home: const LoginScreen(),
+        home: const DetailsFeesScreen(),
       );
 }
