@@ -42,11 +42,15 @@ class ShowFeesButton extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: TextStyles.bodyBold,
+                    style: TextStyles.bodyBold.copyWith(
+                      color: ColorStyles.blackColor,
+                    ),
                   ),
                   Text(
                     date,
-                    style: TextStyles.bodyBold,
+                    style: TextStyles.bodyBold.copyWith(
+                      color: ColorStyles.blackColor,
+                    ),
                   ),
                 ],
               ),
@@ -56,7 +60,8 @@ class ShowFeesButton extends StatelessWidget {
                   Text(
                     price,
                     style: TextStyles.bodyBold.copyWith(
-                      color: ColorStyles.whiteColor,),
+                      color: ColorStyles.whiteColor,
+                    ),
                   ),
                 ],
               ),
