@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:gsb/src/utils/alerts/alert_service.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:gsb/src/utils/utils.dart';
 import 'package:gsb/src/widgets/widgets.dart';
@@ -24,14 +25,13 @@ class AddFees extends StatefulWidget {
 
 class _AddFeesState extends State<AddFees> {
   final TextEditingController _dateValue = TextEditingController();
-  final TextEditingController _numberValue= TextEditingController();
-  final TextEditingController _priceValue= TextEditingController();
+  final TextEditingController _numberValue = TextEditingController();
+  final TextEditingController _priceValue = TextEditingController();
   XFile? _selectedImage;
 
   Future<void> _pickImage() async =>
       await ImagePicker().pickImage(source: ImageSource.gallery).then((image) =>
           image != null ? setState(() => _selectedImage = image) : null);
-
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: HeaderNavBar(
@@ -55,8 +55,7 @@ class _AddFeesState extends State<AddFees> {
                 onTap: () => DateService.showDatePickerDialog(
                   context,
                   onDateSelected: (DateTime selectedDate) => {
-                    DateService.updateSelectedDate(
-                        selectedDate, _dateValue),
+                    DateService.updateSelectedDate(selectedDate, _dateValue),
                     Navigator.of(context).pop(),
                   },
                 ),
@@ -85,15 +84,24 @@ class _AddFeesState extends State<AddFees> {
               const SizedBox(height: AppDimensions.gapSmall),
               CustomButton(
                 text: 'Valider',
-                onPressed: () => {
-                  FirebaseFirestore.instance.collection('Fees').add({
-                    'title': widget.title,
-                    'date': _dateValue.text,
-                    'number': _numberValue.text,
-                    'price': _priceValue.text,
-                    'image': _selectedImage?.path ?? 'Pas de justificatif',
-                    'repay': false,
-                  }),
+                onPressed: () async {
+                  try {
+                    await FirebaseFirestore.instance.collection('Fees').add({
+                      'title': widget.title,
+                      'date': _dateValue.text,
+                      'number': _numberValue.text,
+                      'price': _priceValue.text,
+                      'image': _selectedImage?.path ?? 'Pas de justificatif',
+                      'repay': false,
+                    });
+
+                    AlertDialogWidget.showSuccessDialog(context);
+                    Future.delayed(const Duration(seconds: 2), () {
+                      Navigator.pop(context);
+                    });
+                  } catch (e) {
+                    AlertDialogWidget.showErrorDialog(context);
+                  }
                 },
               ),
             ],

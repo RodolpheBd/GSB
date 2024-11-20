@@ -2,17 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:gsb/src/widgets/widgets.dart';
 
 class DetailsFeesScreen extends StatelessWidget {
-  const DetailsFeesScreen({super.key});
+  final String documentId;
+  final String title;
+  final String? image;
+  final String date;
+  final String number;
+  final String price;
+  final bool repay;
+
+  const DetailsFeesScreen({
+    super.key,
+    required this.documentId,
+    required this.title,
+    this.image,
+    required this.date,
+    required this.number,
+    required this.price,
+    required this.repay,
+  });
 
   @override
   Widget build(BuildContext context) => Scaffold(
         body: Center(
             child: ShowFees(
-                title: "Déplacement",
-                // image: Image.asset('Users/Rodolphe/Pictures/jpeg.jpg'),
-                date: "15-20-2025",
-                number: "22km",
-                price: "33€ H.T.",
-                repay: true)),
+                documentId: documentId,
+                title: title,
+                image: image,
+                date: date,
+                number: number,
+                price: price,
+                repay: repay)),
       );
 }
