@@ -31,43 +31,48 @@ class ShowFeesScreen extends StatelessWidget {
                                   'Aucun frais trouvé',
                                   style: TextStyles.body,
                                 )
-                              : ListView(
-                                  shrinkWrap: true,
-                                  children: snapshot.data!.docs
-                                      .map((DocumentSnapshot document) {
-                                    Map<String, dynamic> data =
-                                        document.data() as Map<String, dynamic>;
-                                    return Column(
-                                      children: [
-                                        ShowFeesButton(
-                                          title: data['title'] ?? 'N/A',
-                                          date: data['date'] ?? 'N/A',
-                                          price: data['price'] ?? 'N/A',
-                                          repay: data['repay'] ?? false,
-                                          onPressed: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    DetailsFeesScreen(
-                                                  documentId: document.id,
-                                                  title: data['title'] ?? 'N/A',
-                                                  image: data['image'] ?? '',
-                                                  date: data['date'] ?? 'N/A',
-                                                  number:
-                                                      data['number'] ?? 'N/A',
-                                                  price: data['price'] ?? 'N/A',
-                                                  repay: data['repay'] ?? false,
+                              : Expanded(
+                                  child: ListView(
+                                    shrinkWrap: true,
+                                    children: snapshot.data!.docs
+                                        .map((DocumentSnapshot document) {
+                                      Map<String, dynamic> data = document
+                                          .data() as Map<String, dynamic>;
+                                      return Column(
+                                        children: [
+                                          ShowFeesButton(
+                                            title: data['title'] ?? 'N/A',
+                                            date: data['date'] ?? 'N/A',
+                                            price: data['price'] ?? 'N/A',
+                                            repay: data['repay'] ?? false,
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      DetailsFeesScreen(
+                                                    documentId: document.id,
+                                                    title:
+                                                        data['title'] ?? 'N/A',
+                                                    image: data['image'] ?? '',
+                                                    date: data['date'] ?? 'N/A',
+                                                    number:
+                                                        data['number'] ?? 'N/A',
+                                                    price:
+                                                        data['price'] ?? 'N/A',
+                                                    repay:
+                                                        data['repay'] ?? false,
+                                                  ),
                                                 ),
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                        const SizedBox(
-                                            height: AppDimensions.gapSmall),
-                                      ],
-                                    );
-                                  }).toList(),
+                                              );
+                                            },
+                                          ),
+                                          const SizedBox(
+                                              height: AppDimensions.gapSmall),
+                                        ],
+                                      );
+                                    }).toList(),
+                                  ),
                                 ),
                 ),
               ],

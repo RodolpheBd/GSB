@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:gsb/src/utils/alerts/alert_service.dart';
+import 'package:gsb/src/utils/utils.dart';
 import 'package:gsb/src/widgets/widgets.dart';
 import 'package:gsb/src/common/common.dart';
 
@@ -88,22 +88,15 @@ class _ShowFeesState extends State<ShowFees> {
                   textColor: widget.repay
                       ? ColorStyles.greenColor
                       : ColorStyles.redColor,
-                  onPressed: () async {
-                    try {
-                      await FirebaseFirestore.instance
-                          .collection('Fees')
-                          .doc(widget.documentId)
-                          .update({
-                        'date': _dateValue.text,
-                        'number': _numberValue.text,
-                        'price': _priceValue.text,
-                      });
-
-                      AlertDialogWidget.showSuccessDialog(context);
-                    } catch (e) {
-                      AlertDialogWidget.showErrorDialog(context);
-                    }
-                  },
+                  onPressed: () => FirestoreService.handleAction(
+                    context: context,
+                    actionType: 'update',
+                    documentId: widget.documentId,
+                    date: _dateValue.text,
+                    number: _numberValue.text,
+                    price: _priceValue.text,
+                    title: widget.title,
+                  ),
                 ),
                 const SizedBox(height: AppDimensions.gapSmall),
                 CustomButton(
@@ -111,18 +104,16 @@ class _ShowFeesState extends State<ShowFees> {
                   textColor: widget.repay
                       ? ColorStyles.greenColor
                       : ColorStyles.redColor,
-                  onPressed: () async {
-                    try {
-                      await FirebaseFirestore.instance
-                          .collection('Fees')
-                          .doc(widget.documentId)
-                          .delete();
-
-                      AlertDialogWidget.showSuccessDialog(context);
-                    } catch (e) {
-                      AlertDialogWidget.showErrorDialog(context);
-                    }
-                  },
+                  onPressed: () => FirestoreService.handleAction(
+                    // Utilisation du service Firestore
+                    context: context,
+                    actionType: 'delete',
+                    documentId: widget.documentId,
+                    date: '',
+                    number: '', // Non utilisé pour la suppression
+                    price: '', // Non utilisé pour la suppression
+                    title: '', // Non utilisé pour la suppression
+                  ),
                 ),
               ],
             ),

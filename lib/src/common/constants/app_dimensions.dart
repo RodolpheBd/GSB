@@ -19,6 +19,10 @@ class AppDimensions {
   static const double widgetLargeHeight = 250.0;
   static const double widgetExtraLargeHeight = 450.0;
 
+  // Alert dialog dimensions
+  static const double alertDialogWidth = 50.0;
+  static const double alertDialogHeight = 50.0;
+
   // Icon sizes
   static const double iconSmall = 40.0;
   static const double iconMedium = 200.0;

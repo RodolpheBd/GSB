@@ -1,6 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:gsb/src/utils/alerts/alert_service.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:gsb/src/utils/utils.dart';
 import 'package:gsb/src/widgets/widgets.dart';
@@ -84,25 +82,16 @@ class _AddFeesState extends State<AddFees> {
               const SizedBox(height: AppDimensions.gapSmall),
               CustomButton(
                 text: 'Valider',
-                onPressed: () async {
-                  try {
-                    await FirebaseFirestore.instance.collection('Fees').add({
-                      'title': widget.title,
-                      'date': _dateValue.text,
-                      'number': _numberValue.text,
-                      'price': _priceValue.text,
-                      'image': _selectedImage?.path ?? 'Pas de justificatif',
-                      'repay': false,
-                    });
-
-                    AlertDialogWidget.showSuccessDialog(context);
-                    Future.delayed(const Duration(seconds: 2), () {
-                      Navigator.pop(context);
-                    });
-                  } catch (e) {
-                    AlertDialogWidget.showErrorDialog(context);
-                  }
-                },
+                onPressed: () => FirestoreService.handleAction(
+                  context: context,
+                  actionType: 'add', 
+                  documentId: '',
+                  title: widget.title,
+                  date: _dateValue.text,
+                  number: _numberValue.text,
+                  price: _priceValue.text,
+                  imagePath: _selectedImage?.path,
+                ),
               ),
             ],
           ),
