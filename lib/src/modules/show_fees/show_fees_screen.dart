@@ -16,8 +16,10 @@ class ShowFeesScreen extends StatelessWidget {
             child: Column(
               children: [
                 StreamBuilder<QuerySnapshot>(
-                  stream:
-                      FirebaseFirestore.instance.collection('Fees').snapshots(),
+                  stream: FirebaseFirestore.instance
+                      .collection('Fees')
+                      .orderBy('date', descending: true)
+                      .snapshots(),
                   builder: (context, snapshot) => snapshot.connectionState ==
                           ConnectionState.waiting
                       ? const CircularProgressIndicator()

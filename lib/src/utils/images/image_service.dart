@@ -6,7 +6,7 @@ import 'package:gsb/src/common/common.dart';
 
 class ImageService {
   static Widget displayImage(XFile image) => ClipRRect(
-        borderRadius: BorderRadius.circular(AppDimensions.borderRadiusMedium),
+        borderRadius: BorderRadius.circular(AppDimensions.borderRadiusSmall),
         child: kIsWeb
             ? Image.network(
                 image.path,

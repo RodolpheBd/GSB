@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gsb/src/utils/utils.dart';
 import 'package:gsb/src/widgets/widgets.dart';
@@ -59,7 +58,7 @@ class _ShowFeesState extends State<ShowFees> {
                 widget.image != null && widget.image!.isNotEmpty
                     ? ClipRRect(
                         borderRadius: BorderRadius.circular(
-                            AppDimensions.borderRadiusMedium),
+                            AppDimensions.borderRadiusSmall),
                         child: Image.network(
                           widget.image!,
                           fit: BoxFit.cover,
@@ -73,14 +72,17 @@ class _ShowFeesState extends State<ShowFees> {
                 const SizedBox(height: AppDimensions.gapSmall),
                 CustomTextInput(
                   value: _dateValue,
+                  placeholder: 'Saisir date',
                 ),
                 const SizedBox(height: AppDimensions.gapSmall),
                 CustomTextInput(
                   value: _numberValue,
+                  placeholder: 'Saisir valeur',
                 ),
                 const SizedBox(height: AppDimensions.gapSmall),
                 CustomTextInput(
                   value: _priceValue,
+                  placeholder: 'Saisir montant (H.T./F)',
                 ),
                 const SizedBox(height: AppDimensions.gapSmall),
                 CustomButton(
@@ -105,14 +107,13 @@ class _ShowFeesState extends State<ShowFees> {
                       ? ColorStyles.greenColor
                       : ColorStyles.redColor,
                   onPressed: () => FirestoreService.handleAction(
-                    // Utilisation du service Firestore
                     context: context,
                     actionType: 'delete',
                     documentId: widget.documentId,
                     date: '',
-                    number: '', // Non utilisé pour la suppression
-                    price: '', // Non utilisé pour la suppression
-                    title: '', // Non utilisé pour la suppression
+                    number: '',
+                    price: '',
+                    title: '',
                   ),
                 ),
               ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:gsb/src/utils/utils.dart';
 import 'package:gsb/src/widgets/widgets.dart';
 import 'package:gsb/src/common/common.dart';
@@ -17,7 +18,6 @@ class AddFees extends StatefulWidget {
   });
 
   @override
-  // ignore: library_private_types_in_public_api
   _AddFeesState createState() => _AddFeesState();
 }
 
@@ -52,9 +52,14 @@ class _AddFeesState extends State<AddFees> {
               GestureDetector(
                 onTap: () => DateService.showDatePickerDialog(
                   context,
-                  onDateSelected: (DateTime selectedDate) => {
-                    DateService.updateSelectedDate(selectedDate, _dateValue),
-                    Navigator.of(context).pop(),
+                  onDateSelected: (DateTime selectedDate) {
+                    setState(() {
+                      String formattedDate =
+                          DateFormat('dd-MM-yyyy').format(selectedDate);
+                      _dateValue.text = formattedDate;
+                    });
+
+                    Navigator.of(context).pop();
                   },
                 ),
                 child: AbsorbPointer(
@@ -84,7 +89,7 @@ class _AddFeesState extends State<AddFees> {
                 text: 'Valider',
                 onPressed: () => FirestoreService.handleAction(
                   context: context,
-                  actionType: 'add', 
+                  actionType: 'add',
                   documentId: '',
                   title: widget.title,
                   date: _dateValue.text,

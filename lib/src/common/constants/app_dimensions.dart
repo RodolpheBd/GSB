@@ -9,7 +9,6 @@ class AppDimensions {
   // Border styles
   static const double borderThickness = 2.0;
   static const double borderRadiusSmall = 10.0;
-  static const double borderRadiusMedium = 25.0;
 
   // Widgets dimensions
   static const double widgetWidth = 310.0;

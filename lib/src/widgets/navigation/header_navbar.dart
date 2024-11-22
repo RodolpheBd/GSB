@@ -18,28 +18,28 @@ class HeaderNavBar extends StatelessWidget implements PreferredSizeWidget {
         preferredSize: preferredSize,
         child: Container(
           color: backgroundColor ?? ColorStyles.whiteColor,
-        child: Padding(
-          padding: EdgeInsets.only(top: AppDimensions.paddingTop),
-          child: Center(
-            child: AppBar(
-              leading: showBackArrow ?? false
-                  ? IconButton(
-                      icon: const Icon(
-                        Icons.chevron_left,
-                        size: AppDimensions.iconSmall,
-                      ),
-                      onPressed: () => Navigator.pop(context),
-                    )
-                  : null,
-              title: Text(
-                title,
-                style: TextStyles.header,
+          child: Padding(
+            padding: EdgeInsets.only(top: AppDimensions.paddingTop),
+            child: Center(
+              child: AppBar(
+                leading: showBackArrow ?? false
+                    ? IconButton(
+                        icon: const Icon(
+                          Icons.chevron_left,
+                          size: AppDimensions.iconSmall,
+                        ),
+                        onPressed: () => Navigator.pop(context),
+                      )
+                    : null,
+                title: Text(
+                  title,
+                  style: TextStyles.header,
+                ),
+                centerTitle: true,
+                backgroundColor: backgroundColor ?? ColorStyles.whiteColor,
               ),
-              centerTitle: true,
-              backgroundColor: backgroundColor ?? ColorStyles.whiteColor,
             ),
           ),
-        ),
         ),
       );
 

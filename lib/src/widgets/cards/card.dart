@@ -26,7 +26,7 @@ class CustomCard extends StatelessWidget {
           decoration: BoxDecoration(
             color: ColorStyles.blackColor,
             borderRadius:
-                BorderRadius.circular(AppDimensions.borderRadiusMedium),
+                BorderRadius.circular(AppDimensions.borderRadiusSmall),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
