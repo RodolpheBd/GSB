@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:gsb/src/common/common.dart';
 
 class CustomTextInput extends StatelessWidget {
+  final TextEditingController? controller;
   final String? placeholder;
-  final TextEditingController? value;
-  final bool? obscureText;
+  final bool? showObscureText;
+  final Widget? suffixIcon;
 
   const CustomTextInput({
     super.key,
     this.placeholder,
-    this.value,
-    this.obscureText,
+    this.controller,
+    this.showObscureText,
+    this.suffixIcon,
   });
 
   @override
@@ -18,8 +20,8 @@ class CustomTextInput extends StatelessWidget {
         height: AppDimensions.widgetSmallHeight,
         width: AppDimensions.widgetWidth,
         child: TextField(
-          controller: value,
-          obscureText: obscureText ?? false,
+          controller: controller,
+          obscureText: showObscureText ?? false,
           decoration: InputDecoration(
             hintText: placeholder,
             hintStyle: TextStyles.body,
@@ -39,6 +41,7 @@ class CustomTextInput extends StatelessWidget {
               borderRadius:
                   BorderRadius.circular(AppDimensions.borderRadiusSmall),
             ),
+            suffixIcon: suffixIcon,
           ),
           style: TextStyles.body,
         ),

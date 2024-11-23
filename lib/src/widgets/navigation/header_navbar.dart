@@ -5,12 +5,14 @@ class HeaderNavBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final Color? backgroundColor;
   final bool? showBackArrow;
+  final VoidCallback? onBackArrowPressed;
 
   const HeaderNavBar({
     super.key,
     required this.title,
     this.backgroundColor,
     this.showBackArrow,
+    this.onBackArrowPressed,
   });
 
   @override
@@ -28,7 +30,8 @@ class HeaderNavBar extends StatelessWidget implements PreferredSizeWidget {
                           Icons.chevron_left,
                           size: AppDimensions.iconSmall,
                         ),
-                        onPressed: () => Navigator.pop(context),
+                        onPressed:
+                            onBackArrowPressed ?? () => Navigator.pop(context),
                       )
                     : null,
                 title: Text(

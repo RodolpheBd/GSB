@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gsb/src/utils/utils.dart';
+import 'package:gsb/src/services/services.dart';
 import 'package:gsb/src/widgets/widgets.dart';
 import 'package:gsb/src/common/common.dart';
 
@@ -71,17 +71,17 @@ class _ShowFeesState extends State<ShowFees> {
                     : const SizedBox(),
                 const SizedBox(height: AppDimensions.gapSmall),
                 CustomTextInput(
-                  value: _dateValue,
+                  controller: _dateValue,
                   placeholder: 'Saisir date',
                 ),
                 const SizedBox(height: AppDimensions.gapSmall),
                 CustomTextInput(
-                  value: _numberValue,
+                  controller: _numberValue,
                   placeholder: 'Saisir valeur',
                 ),
                 const SizedBox(height: AppDimensions.gapSmall),
                 CustomTextInput(
-                  value: _priceValue,
+                  controller: _priceValue,
                   placeholder: 'Saisir montant (H.T./F)',
                 ),
                 const SizedBox(height: AppDimensions.gapSmall),

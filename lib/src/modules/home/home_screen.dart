@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:gsb/src/modules/modules.dart';
@@ -7,9 +8,31 @@ import 'package:gsb/src/common/common.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
+  void _logout(BuildContext context) async {
+    try {
+      await FirebaseAuth.instance.signOut(); // Déconnexion de Firebase
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                const LoginScreen()), // Redirection vers l'écran de connexion
+        (route) => false,
+      );
+    } catch (e) {
+      // Gestion des erreurs de déconnexion si nécessaire
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erreur de déconnexion : ${e.toString()}')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: HeaderNavBar(title: 'Suivi de vos Frais'),
+        appBar: HeaderNavBar(
+          showBackArrow: true,
+          title: 'Suivi de vos Frais',
+          onBackArrowPressed: () => _logout(context),
+        ),
         body: Center(
           child: Column(
             children: [

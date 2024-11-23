@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gsb/src/modules/modules.dart';
 import 'package:gsb/src/widgets/widgets.dart';
 import 'package:gsb/src/common/common.dart';
+import 'package:gsb/src/services/services.dart';
 
 class ShowFeesScreen extends StatelessWidget {
   const ShowFeesScreen({super.key});
@@ -15,11 +16,8 @@ class ShowFeesScreen extends StatelessWidget {
           child: Center(
             child: Column(
               children: [
-                StreamBuilder<QuerySnapshot>(
-                  stream: FirebaseFirestore.instance
-                      .collection('Fees')
-                      .orderBy('date', descending: true)
-                      .snapshots(),
+                StreamBuilder<List<Map<String, dynamic>>>(
+                  stream: FirestoreService.getUserFeesStream(),
                   builder: (context, snapshot) => snapshot.connectionState ==
                           ConnectionState.waiting
                       ? const CircularProgressIndicator()
@@ -28,7 +26,7 @@ class ShowFeesScreen extends StatelessWidget {
                               'Erreur : ${snapshot.error}',
                               style: TextStyles.body,
                             )
-                          : (!snapshot.hasData || snapshot.data!.docs.isEmpty)
+                          : (!snapshot.hasData || snapshot.data!.isEmpty)
                               ? Text(
                                   'Aucun frais trouvé',
                                   style: TextStyles.body,
@@ -36,34 +34,32 @@ class ShowFeesScreen extends StatelessWidget {
                               : Expanded(
                                   child: ListView(
                                     shrinkWrap: true,
-                                    children: snapshot.data!.docs
-                                        .map((DocumentSnapshot document) {
-                                      Map<String, dynamic> data = document
-                                          .data() as Map<String, dynamic>;
+                                    children: snapshot.data!
+                                        .map((Map<String, dynamic> fee) {
                                       return Column(
                                         children: [
                                           ShowFeesButton(
-                                            title: data['title'] ?? 'N/A',
-                                            date: data['date'] ?? 'N/A',
-                                            price: data['price'] ?? 'N/A',
-                                            repay: data['repay'] ?? false,
+                                            title: fee['title'] ?? 'N/A',
+                                            date: fee['date'] ?? 'N/A',
+                                            price: fee['price'] ?? 'N/A',
+                                            repay: fee['repay'] ?? false,
                                             onPressed: () {
                                               Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
                                                       DetailsFeesScreen(
-                                                    documentId: document.id,
+                                                    documentId: fee['id'] ?? '',
                                                     title:
-                                                        data['title'] ?? 'N/A',
-                                                    image: data['image'] ?? '',
-                                                    date: data['date'] ?? 'N/A',
+                                                        fee['title'] ?? 'N/A',
+                                                    image: fee['image'] ?? '',
+                                                    date: fee['date'] ?? 'N/A',
                                                     number:
-                                                        data['number'] ?? 'N/A',
+                                                        fee['number'] ?? 'N/A',
                                                     price:
-                                                        data['price'] ?? 'N/A',
+                                                        fee['price'] ?? 'N/A',
                                                     repay:
-                                                        data['repay'] ?? false,
+                                                        fee['repay'] ?? false,
                                                   ),
                                                 ),
                                               );

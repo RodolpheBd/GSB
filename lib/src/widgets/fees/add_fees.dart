@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:gsb/src/utils/utils.dart';
+import 'package:gsb/src/services/services.dart';
 import 'package:gsb/src/widgets/widgets.dart';
 import 'package:gsb/src/common/common.dart';
 
@@ -64,19 +64,19 @@ class _AddFeesState extends State<AddFees> {
                 ),
                 child: AbsorbPointer(
                   child: CustomTextInput(
-                    value: _dateValue,
+                    controller: _dateValue,
                     placeholder: "Saisir date",
                   ),
                 ),
               ),
               const SizedBox(height: AppDimensions.gapSmall),
               CustomTextInput(
-                value: _numberValue,
+                controller: _numberValue,
                 placeholder: widget.textInput,
               ),
               const SizedBox(height: AppDimensions.gapSmall),
               CustomTextInput(
-                value: _priceValue,
+                controller: _priceValue,
                 placeholder: 'Saisir montant (H.T./F)',
               ),
               const SizedBox(height: AppDimensions.gapSmall),
