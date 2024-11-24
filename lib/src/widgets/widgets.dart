@@ -1,19 +1,18 @@
 // Button
-export 'package:gsb/src/widgets/buttons/button.dart';
-export 'package:gsb/src/widgets/buttons/show_fees_button.dart';
+export 'package:gsb/src/widgets/button.dart';
+export 'package:gsb/src/show_fees/show_fees_button.dart';
 
 // TextInput
-export 'package:gsb/src/widgets/inputs/text_input.dart';
+export 'package:gsb/src/widgets/text_input.dart';
 
 // Cards
-export 'package:gsb/src/widgets/cards/card.dart';
+export 'package:gsb/src/widgets/card.dart';
 
 // Calendar
-export 'package:gsb/src/widgets/calendar/calendar.dart';
-
-// Fees
-export 'package:gsb/src/widgets/fees/add_fees.dart';
-export 'package:gsb/src/widgets/fees/show_fees.dart';
+export 'package:gsb/src/widgets/calendar.dart';
 
 // Navigation
-export 'package:gsb/src/widgets/navigation/header_navbar.dart';
+export 'package:gsb/src/widgets/header_navbar.dart';
+
+// Alert
+export 'package:gsb/src/widgets/alert_dialog.dart';

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:gsb/src/services/services.dart';
+import 'package:gsb/src/imports.dart';
 import 'package:gsb/src/widgets/widgets.dart';
 import 'package:gsb/src/common/common.dart';
 
-class AddFees extends StatefulWidget {
+class Fees extends StatefulWidget {
   final String title;
   final String icon;
   final String textInput;
 
-  const AddFees({
+  const Fees({
     super.key,
     required this.title,
     required this.icon,
@@ -18,10 +18,10 @@ class AddFees extends StatefulWidget {
   });
 
   @override
-  _AddFeesState createState() => _AddFeesState();
+  _FeesState createState() => _FeesState();
 }
 
-class _AddFeesState extends State<AddFees> {
+class _FeesState extends State<Fees> {
   final TextEditingController _dateValue = TextEditingController();
   final TextEditingController _numberValue = TextEditingController();
   final TextEditingController _priceValue = TextEditingController();
@@ -29,7 +29,8 @@ class _AddFeesState extends State<AddFees> {
 
   Future<void> _pickImage() async =>
       await ImagePicker().pickImage(source: ImageSource.gallery).then((image) =>
-          image != null ? setState(() => _selectedImage = image) : null);
+          (image != null) ? setState(() => _selectedImage = image) : null);
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: HeaderNavBar(
@@ -40,7 +41,7 @@ class _AddFeesState extends State<AddFees> {
           child: Column(
             children: [
               const SizedBox(height: AppDimensions.gapMedium),
-              _selectedImage == null
+              (_selectedImage) == null
                   ? CustomCard(
                       icon: widget.icon,
                       height: AppDimensions.widgetLargeHeight,
@@ -50,15 +51,13 @@ class _AddFeesState extends State<AddFees> {
                   : ImageService.displayImage(_selectedImage!),
               const SizedBox(height: AppDimensions.gapSmall),
               GestureDetector(
-                onTap: () => DateService.showDatePickerDialog(
+                onTap: () => CalendarService.showDatePickerDialog(
                   context,
                   onDateSelected: (DateTime selectedDate) {
-                    setState(() {
-                      String formattedDate =
-                          DateFormat('dd-MM-yyyy').format(selectedDate);
-                      _dateValue.text = formattedDate;
-                    });
-
+                    setState(
+                      () => _dateValue.text =
+                          DateFormat('dd-MM-yyyy').format(selectedDate),
+                    );
                     Navigator.of(context).pop();
                   },
                 ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gsb/src/widgets/widgets.dart';
+import 'package:gsb/src/imports.dart';
 
-class DetailsFeesScreen extends StatelessWidget {
+class ShowFeesScreen extends StatelessWidget {
   final String documentId;
   final String title;
   final String? image;
@@ -10,7 +10,7 @@ class DetailsFeesScreen extends StatelessWidget {
   final String price;
   final bool repay;
 
-  const DetailsFeesScreen({
+  const ShowFeesScreen({
     super.key,
     required this.documentId,
     required this.title,
@@ -24,7 +24,7 @@ class DetailsFeesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: Center(
-            child: ShowFees(
+            child: ShowFeesService(
                 documentId: documentId,
                 title: title,
                 image: image,

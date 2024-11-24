@@ -1,12 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:gsb/src/modules/modules.dart';
+import 'package:gsb/src/imports.dart';
 import 'package:gsb/src/widgets/widgets.dart';
 import 'package:gsb/src/common/common.dart';
-import 'package:gsb/src/services/services.dart';
 
-class ShowFeesScreen extends StatelessWidget {
-  const ShowFeesScreen({super.key});
+class ListFeesScreen extends StatelessWidget {
+  const ListFeesScreen({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -18,10 +16,10 @@ class ShowFeesScreen extends StatelessWidget {
               children: [
                 StreamBuilder<List<Map<String, dynamic>>>(
                   stream: FirestoreService.getUserFeesStream(),
-                  builder: (context, snapshot) => snapshot.connectionState ==
-                          ConnectionState.waiting
+                  builder: (context, snapshot) => (snapshot.connectionState ==
+                          ConnectionState.waiting)
                       ? const CircularProgressIndicator()
-                      : snapshot.hasError
+                      : (snapshot.hasError)
                           ? Text(
                               'Erreur : ${snapshot.error}',
                               style: TextStyles.body,
@@ -43,27 +41,22 @@ class ShowFeesScreen extends StatelessWidget {
                                             date: fee['date'] ?? 'N/A',
                                             price: fee['price'] ?? 'N/A',
                                             repay: fee['repay'] ?? false,
-                                            onPressed: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      DetailsFeesScreen(
-                                                    documentId: fee['id'] ?? '',
-                                                    title:
-                                                        fee['title'] ?? 'N/A',
-                                                    image: fee['image'] ?? '',
-                                                    date: fee['date'] ?? 'N/A',
-                                                    number:
-                                                        fee['number'] ?? 'N/A',
-                                                    price:
-                                                        fee['price'] ?? 'N/A',
-                                                    repay:
-                                                        fee['repay'] ?? false,
-                                                  ),
+                                            onPressed: () => Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ShowFeesScreen(
+                                                  documentId: fee['id'] ?? '',
+                                                  title: fee['title'] ?? 'N/A',
+                                                  image: fee['image'] ?? '',
+                                                  date: fee['date'] ?? 'N/A',
+                                                  number:
+                                                      fee['number'] ?? 'N/A',
+                                                  price: fee['price'] ?? 'N/A',
+                                                  repay: fee['repay'] ?? false,
                                                 ),
-                                              );
-                                            },
+                                              ),
+                                            ),
                                           ),
                                           const SizedBox(
                                               height: AppDimensions.gapSmall),

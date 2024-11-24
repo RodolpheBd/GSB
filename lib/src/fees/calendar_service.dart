@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gsb/src/widgets/calendar/calendar.dart';
+import 'package:gsb/src/widgets/calendar.dart';
 import 'package:gsb/src/common/common.dart';
 
-class DateService {
+class CalendarService {
   static DateTime selectedDay = DateTime.now();
   static DateTime focusedDay = DateTime.now();
 

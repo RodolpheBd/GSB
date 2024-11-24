@@ -19,7 +19,7 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => GestureDetector(
-        onTap: onPressed ?? () => {},
+        onTap: onPressed,
         child: Container(
           height: height,
           width: width,
@@ -33,15 +33,15 @@ class CustomCard extends StatelessWidget {
             children: [
               Image.asset(
                 icon,
-                height: text != null
+                height: (text != null)
                     ? AppDimensions.iconLarge
                     : AppDimensions.iconMedium,
-                width: text != null
+                width: (text != null)
                     ? AppDimensions.iconLarge
                     : AppDimensions.iconMedium,
                 fit: BoxFit.contain,
               ),
-              text != null
+              (text != null)
                   ? Column(
                       children: [
                         const SizedBox(height: AppDimensions.gapSmall),

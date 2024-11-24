@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gsb/src/common/common.dart';
-import 'package:gsb/src/widgets/widgets.dart';
+import 'package:gsb/src/imports.dart';
 
-class AddCoffeeFeesScreen extends StatelessWidget {
-  const AddCoffeeFeesScreen({super.key});
+class CoffeeFeesScreen extends StatelessWidget {
+  const CoffeeFeesScreen({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
         body: Center(
-          child: AddFees(
+          child: Fees(
             title: 'Café',
             icon: AppIcons.coffee,
             textInput: 'Saisir café(s)',

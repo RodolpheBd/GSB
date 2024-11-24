@@ -1,7 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gsb/src/services/alerts/alert_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:gsb/src/common/common.dart';
+import 'package:gsb/src/widgets/widgets.dart';
 
 class FirestoreService {
   static Future<void> handleAction({
@@ -81,8 +82,8 @@ class FirestoreService {
       }
 
       // Afficher un message de succès
-      Future.delayed(
-          const Duration(seconds: 2), () => Navigator.of(context).pop());
+      Future.delayed(const Duration(seconds: AppDuration.alertDialogTime),
+          () => Navigator.of(context).pop());
       AlertDialogWidget.showSuccessDialog(context);
     } catch (e) {
       // Gestion des erreurs

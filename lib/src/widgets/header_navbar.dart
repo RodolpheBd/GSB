@@ -5,14 +5,14 @@ class HeaderNavBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final Color? backgroundColor;
   final bool? showBackArrow;
-  final VoidCallback? onBackArrowPressed;
+  final VoidCallback? onLeaveArrowPressed;
 
   const HeaderNavBar({
     super.key,
     required this.title,
     this.backgroundColor,
     this.showBackArrow,
-    this.onBackArrowPressed,
+    this.onLeaveArrowPressed,
   });
 
   @override
@@ -24,14 +24,14 @@ class HeaderNavBar extends StatelessWidget implements PreferredSizeWidget {
             padding: EdgeInsets.only(top: AppDimensions.paddingTop),
             child: Center(
               child: AppBar(
-                leading: showBackArrow ?? false
+                leading: (showBackArrow ?? false)
                     ? IconButton(
                         icon: const Icon(
                           Icons.chevron_left,
                           size: AppDimensions.iconSmall,
                         ),
                         onPressed:
-                            onBackArrowPressed ?? () => Navigator.pop(context),
+                            onLeaveArrowPressed ?? () => Navigator.pop(context),
                       )
                     : null,
                 title: Text(

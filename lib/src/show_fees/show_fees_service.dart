@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gsb/src/services/services.dart';
+import 'package:gsb/src/imports.dart';
 import 'package:gsb/src/widgets/widgets.dart';
 import 'package:gsb/src/common/common.dart';
 
-class ShowFees extends StatefulWidget {
-  // Changez pour StatefulWidget
+class ShowFeesService extends StatefulWidget {
   final String documentId;
   final String title;
   final String? image;
@@ -13,7 +12,7 @@ class ShowFees extends StatefulWidget {
   final String price;
   final bool repay;
 
-  const ShowFees({
+  const ShowFeesService({
     super.key,
     required this.title,
     this.image,
@@ -25,10 +24,10 @@ class ShowFees extends StatefulWidget {
   });
 
   @override
-  _ShowFeesState createState() => _ShowFeesState();
+  _ShowFeesServiceState createState() => _ShowFeesServiceState();
 }
 
-class _ShowFeesState extends State<ShowFees> {
+class _ShowFeesServiceState extends State<ShowFeesService> {
   final TextEditingController _dateValue = TextEditingController();
   final TextEditingController _numberValue = TextEditingController();
   final TextEditingController _priceValue = TextEditingController();
@@ -55,7 +54,7 @@ class _ShowFeesState extends State<ShowFees> {
             child: Column(
               children: [
                 const SizedBox(height: AppDimensions.gapMedium),
-                widget.image != null && widget.image!.isNotEmpty
+                (widget.image != null && widget.image!.isNotEmpty)
                     ? ClipRRect(
                         borderRadius: BorderRadius.circular(
                             AppDimensions.borderRadiusSmall),

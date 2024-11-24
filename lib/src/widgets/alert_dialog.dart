@@ -18,12 +18,12 @@ class AlertDialogWidget extends StatelessWidget {
             height: AppDimensions.alertDialogHeight,
             decoration: BoxDecoration(
               color: ColorStyles.whiteColor,
-              borderRadius: BorderRadius.circular(AppDimensions.borderRadiusSmall),
+              borderRadius:
+                  BorderRadius.circular(AppDimensions.borderRadiusSmall),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment:
-                  CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Icon(
                   icon,
@@ -50,7 +50,7 @@ class AlertDialogWidget extends StatelessWidget {
       ),
     );
 
-    Future.delayed(
-        const Duration(seconds: 1), () => Navigator.of(context).pop());
+    Future.delayed(const Duration(seconds: AppDuration.alertDialogTime),
+        () => Navigator.of(context).pop());
   }
 }

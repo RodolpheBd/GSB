@@ -1,37 +1,20 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:gsb/src/modules/modules.dart';
+import 'package:gsb/src/imports.dart';
 import 'package:gsb/src/widgets/widgets.dart';
 import 'package:gsb/src/common/common.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
 
-  void _logout(BuildContext context) async {
-    try {
-      await FirebaseAuth.instance.signOut(); // Déconnexion de Firebase
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                const LoginScreen()), // Redirection vers l'écran de connexion
-        (route) => false,
-      );
-    } catch (e) {
-      // Gestion des erreurs de déconnexion si nécessaire
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Erreur de déconnexion : ${e.toString()}')),
-      );
-    }
-  }
+  final LogoutService _logoutService = LogoutService();
 
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: HeaderNavBar(
           showBackArrow: true,
           title: 'Suivi de vos Frais',
-          onBackArrowPressed: () => _logout(context),
+          onLeaveArrowPressed: () => _logoutService.logout(context),
         ),
         body: Center(
           child: Column(
@@ -47,7 +30,7 @@ class HomeScreen extends StatelessWidget {
                     onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const AddCarFeesScreen()),
+                          builder: (context) => const CarFeesScreen()),
                     ),
                   ),
                   CustomCard(
@@ -58,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                     onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const AddCateringFeesScreen()),
+                          builder: (context) => const CateringFeesScreen()),
                     ),
                   ),
                   CustomCard(
@@ -69,7 +52,7 @@ class HomeScreen extends StatelessWidget {
                     onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const AddHotelFeesScreen()),
+                          builder: (context) => const HotelFeesScreen()),
                     ),
                   ),
                   CustomCard(
@@ -80,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                     onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const AddCoffeeFeesScreen()),
+                          builder: (context) => const CoffeeFeesScreen()),
                     ),
                   ),
                 ],
@@ -101,7 +84,7 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const ShowFeesScreen()),
+                      builder: (context) => const ListFeesScreen()),
                 ),
               ),
             ],
