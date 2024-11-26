@@ -55,10 +55,9 @@ class _FeesState extends State<Fees> {
                 onTap: () => CalendarService.showDatePickerDialog(
                   context,
                   onDateSelected: (DateTime selectedDate) {
-                    setState(
-                      () => _dateValue.text =
-                          DateFormat('dd-MM-yyyy').format(selectedDate),
-                    );
+                    CalendarService.updateSelectedDate(selectedDate);
+                    setState(() => _dateValue.text =
+                        DateFormat('dd-MM-yyyy').format(selectedDate));
                     Navigator.of(context).pop();
                   },
                 ),

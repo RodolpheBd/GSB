@@ -37,7 +37,6 @@ class ListFeesScreen extends StatelessWidget {
       );
     }
 
-    // Affichage de la liste des frais récupérés de Firestore (déjà triée)
     return Expanded(
       child: ListView.builder(
         shrinkWrap: true,

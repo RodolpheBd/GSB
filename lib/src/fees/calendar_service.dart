@@ -22,17 +22,17 @@ class CalendarService {
             child: CustomCalendar(
               selectedDay: selectedDay,
               focusedDay: focusedDay,
-              onDateSelected: onDateSelected,
+              onDateSelected: (DateTime newDate) {
+                updateSelectedDate(newDate);
+                onDateSelected(newDate);
+              },
             ),
           ),
         ),
       );
 
-  static void updateSelectedDate(
-          DateTime newDate, TextEditingController controller) =>
-      (
-        selectedDay = newDate,
-        focusedDay = newDate,
-        controller.text = formatDate(newDate),
-      );
+  static void updateSelectedDate(DateTime newDate) {
+    selectedDay = newDate;
+    focusedDay = newDate;
+  }
 }

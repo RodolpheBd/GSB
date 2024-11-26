@@ -41,8 +41,6 @@ class FirestoreService {
         return;
       }
 
-      // Timestamp recordedDate = Timestamp.fromDate(DateTime.parse(date));
-
       await (actionType == 'add'
           ? userFeesRef.add({
               'title': title,
@@ -52,7 +50,6 @@ class FirestoreService {
               'image': imagePath ?? 'Pas de justificatif',
               'repay': false,
               'createdAt': FieldValue.serverTimestamp(),
-              // 'recordedDate': recordedDate,
             })
           : actionType == 'update'
               ? (documentId.isEmpty
@@ -61,7 +58,6 @@ class FirestoreService {
                       'date': date,
                       'number': number,
                       'price': price,
-                      // 'recorderDate': recordedDate,
                     }))
               : actionType == 'delete'
                   ? (documentId.isEmpty
@@ -89,7 +85,7 @@ class FirestoreService {
 
     try {
       final snapshot =
-          await userFeesRef.orderBy('date', descending: true).get(); // Date
+          await userFeesRef.orderBy('createdAt', descending: true).get();
       return snapshot.docs.map((doc) => {'id': doc.id, ...doc.data()}).toList();
     } catch (e) {
       throw Exception(
@@ -102,7 +98,7 @@ class FirestoreService {
     final userFeesRef = _getUserFeesRef(_getCurrentUser());
     return userFeesRef == null
         ? Stream.value([])
-        : userFeesRef.orderBy('date', descending: true).snapshots().map( // Date
+        : userFeesRef.orderBy('createdAt', descending: true).snapshots().map(
               (snapshot) => snapshot.docs
                   .map((doc) => {'id': doc.id, ...doc.data()})
                   .toList(),
