@@ -26,6 +26,7 @@ class _FeesState extends State<Fees> {
   final TextEditingController _numberValue = TextEditingController();
   final TextEditingController _priceValue = TextEditingController();
   XFile? _selectedImage;
+  bool _isLoading = false;
 
   Future<void> _pickImage() async =>
       await ImagePicker().pickImage(source: ImageSource.gallery).then((image) =>
@@ -86,16 +87,21 @@ class _FeesState extends State<Fees> {
               const SizedBox(height: AppDimensions.gapSmall),
               CustomButton(
                 text: 'Valider',
-                onPressed: () => FirestoreService.handleAction(
-                  context: context,
-                  actionType: 'add',
-                  documentId: '',
-                  title: widget.title,
-                  date: _dateValue.text,
-                  number: _numberValue.text,
-                  price: _priceValue.text,
-                  imagePath: _selectedImage?.path,
-                ),
+                isLoading: _isLoading,
+                onPressed: () async {
+                  setState(() => _isLoading = true);
+                  await FirestoreService.handleAction(
+                    context: context,
+                    actionType: 'add',
+                    documentId: '',
+                    title: widget.title,
+                    date: _dateValue.text,
+                    number: _numberValue.text,
+                    price: _priceValue.text,
+                    imagePath: _selectedImage?.path,
+                  );
+                  setState(() => _isLoading = false);
+                },
               ),
             ],
           ),

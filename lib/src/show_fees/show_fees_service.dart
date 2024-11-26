@@ -31,6 +31,8 @@ class _ShowFeesServiceState extends State<ShowFeesService> {
   final TextEditingController _dateValue = TextEditingController();
   final TextEditingController _numberValue = TextEditingController();
   final TextEditingController _priceValue = TextEditingController();
+  bool _isLoadingValidate = false;
+  bool _isLoadingDelete = false;
 
   @override
   void initState() {
@@ -89,15 +91,20 @@ class _ShowFeesServiceState extends State<ShowFeesService> {
                   textColor: widget.repay
                       ? ColorStyles.greenColor
                       : ColorStyles.redColor,
-                  onPressed: () => FirestoreService.handleAction(
-                    context: context,
-                    actionType: 'update',
-                    documentId: widget.documentId,
-                    date: _dateValue.text,
-                    number: _numberValue.text,
-                    price: _priceValue.text,
-                    title: widget.title,
-                  ),
+                  isLoading: _isLoadingValidate,
+                  onPressed: () async {
+                    setState(() => _isLoadingValidate = true);
+                    await FirestoreService.handleAction(
+                      context: context,
+                      actionType: 'update',
+                      documentId: widget.documentId,
+                      date: _dateValue.text,
+                      number: _numberValue.text,
+                      price: _priceValue.text,
+                      title: widget.title,
+                    );
+                    setState(() => _isLoadingValidate = false);
+                  },
                 ),
                 const SizedBox(height: AppDimensions.gapSmall),
                 CustomButton(
@@ -105,15 +112,20 @@ class _ShowFeesServiceState extends State<ShowFeesService> {
                   textColor: widget.repay
                       ? ColorStyles.greenColor
                       : ColorStyles.redColor,
-                  onPressed: () => FirestoreService.handleAction(
-                    context: context,
-                    actionType: 'delete',
-                    documentId: widget.documentId,
-                    date: '',
-                    number: '',
-                    price: '',
-                    title: '',
-                  ),
+                  isLoading: _isLoadingDelete,
+                  onPressed: () async {
+                    setState(() => _isLoadingDelete = true);
+                    await FirestoreService.handleAction(
+                      context: context,
+                      actionType: 'delete',
+                      documentId: widget.documentId,
+                      date: '',
+                      number: '',
+                      price: '',
+                      title: '',
+                    );
+                    setState(() => _isLoadingDelete = false);
+                  },
                 ),
               ],
             ),

@@ -5,6 +5,17 @@ import 'package:gsb/src/common/common.dart';
 import 'package:gsb/src/widgets/widgets.dart';
 
 class FirestoreService {
+  static User? _getCurrentUser() => FirebaseAuth.instance.currentUser;
+
+  static CollectionReference<Map<String, dynamic>>? _getUserFeesRef(
+          User? user) =>
+      (user == null || user.email == null)
+          ? null
+          : FirebaseFirestore.instance
+              .collection('users')
+              .doc(user.email!.toLowerCase())
+              .collection('Fees');
+
   static Future<void> handleAction({
     required BuildContext context,
     required String actionType,
@@ -16,150 +27,85 @@ class FirestoreService {
     String? imagePath,
   }) async {
     try {
-      // Obtenir l'utilisateur actuellement connecté
-      User? currentUser = FirebaseAuth.instance.currentUser;
+      final currentUser = _getCurrentUser();
+      final userFeesRef = _getUserFeesRef(currentUser);
 
-      if (currentUser == null || currentUser.email == null) {
+      if (userFeesRef == null) {
         AlertDialogWidget.showErrorDialog(context);
         return;
       }
 
-      // Obtenir le mail de l'utilisateur connecté
-      final userEmail = currentUser.email!.toLowerCase();
-
-      // Vérification des champs requis (sauf pour une suppression)
       if (actionType != 'delete' &&
-          (date.isEmpty || number.isEmpty || price.isEmpty || title.isEmpty)) {
+          [date, number, price, title].any((field) => field.isEmpty)) {
         AlertDialogWidget.showErrorDialog(context);
         return;
       }
 
-      // Référence à la sous-collection "Fees" de l'utilisateur basé sur son email
-      final userFeesRef = FirebaseFirestore.instance
-          .collection('users')
-          .doc(userEmail)
-          .collection('Fees');
+      // Timestamp recordedDate = Timestamp.fromDate(DateTime.parse(date));
 
-      switch (actionType) {
-        case 'add':
-          // Ajouter un frais
-          await userFeesRef.add({
-            'title': title,
-            'date': date,
-            'number': number,
-            'price': price,
-            'image': imagePath ?? 'Pas de justificatif',
-            'repay': false,
-            'createdAt': FieldValue.serverTimestamp(),
-          });
-          break;
+      await (actionType == 'add'
+          ? userFeesRef.add({
+              'title': title,
+              'date': date,
+              'number': number,
+              'price': price,
+              'image': imagePath ?? 'Pas de justificatif',
+              'repay': false,
+              'createdAt': FieldValue.serverTimestamp(),
+              // 'recordedDate': recordedDate,
+            })
+          : actionType == 'update'
+              ? (documentId.isEmpty
+                  ? throw Exception('ID du document manquant.')
+                  : userFeesRef.doc(documentId).update({
+                      'date': date,
+                      'number': number,
+                      'price': price,
+                      // 'recorderDate': recordedDate,
+                    }))
+              : actionType == 'delete'
+                  ? (documentId.isEmpty
+                      ? throw Exception('ID du document manquant.')
+                      : userFeesRef.doc(documentId).delete())
+                  : throw Exception('Type d’action invalide.'));
 
-        case 'update':
-          // Mettre à jour un frais existant
-          if (documentId.isEmpty) {
-            AlertDialogWidget.showErrorDialog(context);
-            return;
-          }
-          await userFeesRef.doc(documentId).update({
-            'date': date,
-            'number': number,
-            'price': price,
-          });
-          break;
-
-        case 'delete':
-          // Supprimer un frais
-          if (documentId.isEmpty) {
-            AlertDialogWidget.showErrorDialog(context);
-            return;
-          }
-          await userFeesRef.doc(documentId).delete();
-          break;
-
-        default:
-          AlertDialogWidget.showErrorDialog(context);
-          return;
-      }
-
-      // Afficher un message de succès
-      Future.delayed(const Duration(seconds: AppDuration.alertDialogTime),
-          () => Navigator.of(context).pop());
       AlertDialogWidget.showSuccessDialog(context);
-    } catch (e) {
-      // Gestion des erreurs
-      AlertDialogWidget.showErrorDialog(
-        context,
+      Future.delayed(
+        const Duration(seconds: AppDuration.alertDialogTime),
+        () => Navigator.of(context).pop(),
       );
+    } catch (e) {
+      AlertDialogWidget.showErrorDialog(context);
     }
   }
 
-  /// Méthode pour récupérer tous les frais d'un utilisateur connecté via son email
+  // Fetch all the fees for the currently logged-in user
   static Future<List<Map<String, dynamic>>> getUserFees() async {
+    final userFeesRef = _getUserFeesRef(_getCurrentUser());
+
+    if (userFeesRef == null) {
+      throw Exception('Utilisateur non connecté.');
+    }
+
     try {
-      // Obtenir l'utilisateur actuellement connecté
-      User? currentUser = FirebaseAuth.instance.currentUser;
-
-      if (currentUser == null || currentUser.email == null) {
-        throw Exception('Utilisateur non connecté ou email manquant.');
-      }
-
-      // Obtenir le mail de l'utilisateur connecté
-      final userEmail = currentUser.email!.toLowerCase();
-
-      // Récupérer les documents de la sous-collection "Fees"
-      final userFeesRef = FirebaseFirestore.instance
-          .collection('users')
-          .doc(userEmail)
-          .collection('Fees');
-
-      QuerySnapshot snapshot =
-          await userFeesRef.orderBy('createdAt', descending: true).get();
-
-      // Retourner les données sous forme de liste de maps
-      return snapshot.docs.map((doc) {
-        return {
-          'id': doc.id,
-          ...doc.data() as Map<String, dynamic>,
-        };
-      }).toList();
+      final snapshot =
+          await userFeesRef.orderBy('date', descending: true).get(); // Date
+      return snapshot.docs.map((doc) => {'id': doc.id, ...doc.data()}).toList();
     } catch (e) {
       throw Exception(
           'Erreur lors de la récupération des frais : ${e.toString()}');
     }
   }
 
-  /// Méthode pour récupérer les frais d'un utilisateur en temps réel via son email
+  // Fetch real-time fees for the currently logged-in user
   static Stream<List<Map<String, dynamic>>> getUserFeesStream() {
-    try {
-      // Obtenir l'utilisateur actuellement connecté
-      User? currentUser = FirebaseAuth.instance.currentUser;
-
-      if (currentUser == null || currentUser.email == null) {
-        return Stream.value([]); // Retourner un flux vide si non connecté
-      }
-
-      // Obtenir le mail de l'utilisateur connecté
-      final userEmail = currentUser.email!.toLowerCase();
-
-      // Récupérer les documents de la sous-collection "Fees" en temps réel
-      final userFeesRef = FirebaseFirestore.instance
-          .collection('users')
-          .doc(userEmail)
-          .collection('Fees');
-
-      return userFeesRef.orderBy('createdAt', descending: true).snapshots().map(
-        (snapshot) {
-          return snapshot.docs.map((doc) {
-            return {
-              'id': doc.id,
-              ...doc.data() as Map<String, dynamic>,
-            };
-          }).toList();
-        },
-      );
-    } catch (e) {
-      // En cas d'erreur, retourner un flux vide
-      return Stream.value([]);
-    }
+    final userFeesRef = _getUserFeesRef(_getCurrentUser());
+    return userFeesRef == null
+        ? Stream.value([])
+        : userFeesRef.orderBy('date', descending: true).snapshots().map( // Date
+              (snapshot) => snapshot.docs
+                  .map((doc) => {'id': doc.id, ...doc.data()})
+                  .toList(),
+            );
   }
 }

@@ -5,12 +5,14 @@ class CustomButton extends StatelessWidget {
   final String text;
   final Color? textColor;
   final VoidCallback onPressed;
+  final bool? isLoading;
 
   const CustomButton({
     super.key,
     required this.text,
     this.textColor,
     required this.onPressed,
+    this.isLoading
   });
 
   @override
@@ -21,17 +23,24 @@ class CustomButton extends StatelessWidget {
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
             backgroundColor: ColorStyles.blackColor,
+            elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius:
                   BorderRadius.circular(AppDimensions.borderRadiusSmall),
             ),
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+            shadowColor: Colors.transparent,
           ),
-          child: Text(
-            text,
-            style: TextStyles.bodyBold.copyWith(
-              color: textColor ?? ColorStyles.whiteColor,
-            ),
-          ),
+          child: (isLoading ?? false)
+              ? const CircularProgressIndicator(
+                  color: ColorStyles.whiteColor,
+                )
+              : Text(
+                  text,
+                  style: TextStyles.bodyBold.copyWith(
+                    color: textColor ?? ColorStyles.whiteColor,
+                  ),
+                ),
         ),
       );
 }

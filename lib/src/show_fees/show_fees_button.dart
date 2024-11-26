@@ -25,6 +25,7 @@ class ShowFeesButton extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor:
                 repay ? ColorStyles.greenColor : ColorStyles.redColor,
+            elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius:
                   BorderRadius.circular(AppDimensions.borderRadiusSmall),
@@ -33,6 +34,8 @@ class ShowFeesButton extends StatelessWidget {
                 width: AppDimensions.borderThickness,
               ),
             ),
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+            shadowColor: Colors.transparent,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

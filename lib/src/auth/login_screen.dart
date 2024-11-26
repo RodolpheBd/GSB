@@ -48,12 +48,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               const SizedBox(height: AppDimensions.gapSmall),
-              (_isLoading)
-                  ? CircularProgressIndicator()
-                  : CustomButton(
-                      text: 'Login',
-                      onPressed: () => _login(context),
-                    ),
+              CustomButton(
+                text: 'Login',
+                isLoading: _isLoading,
+                onPressed: () => !_isLoading ? _login(context) : null,
+              )
             ],
           ),
         ),

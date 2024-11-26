@@ -15,57 +15,66 @@ class ListFeesScreen extends StatelessWidget {
             child: Column(
               children: [
                 StreamBuilder<List<Map<String, dynamic>>>(
-                  stream: FirestoreService.getUserFeesStream(),
-                  builder: (context, snapshot) => (snapshot.connectionState ==
-                          ConnectionState.waiting)
-                      ? const CircularProgressIndicator()
-                      : (snapshot.hasError)
-                          ? Text(
-                              'Erreur : ${snapshot.error}',
-                              style: TextStyles.body,
-                            )
-                          : (!snapshot.hasData || snapshot.data!.isEmpty)
-                              ? Text(
-                                  'Aucun frais trouvé',
-                                  style: TextStyles.body,
-                                )
-                              : Expanded(
-                                  child: ListView(
-                                    shrinkWrap: true,
-                                    children: snapshot.data!
-                                        .map((Map<String, dynamic> fee) {
-                                      return Column(
-                                        children: [
-                                          ShowFeesButton(
-                                            title: fee['title'] ?? 'N/A',
-                                            date: fee['date'] ?? 'N/A',
-                                            price: fee['price'] ?? 'N/A',
-                                            repay: fee['repay'] ?? false,
-                                            onPressed: () => Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ShowFeesScreen(
-                                                  documentId: fee['id'] ?? '',
-                                                  title: fee['title'] ?? 'N/A',
-                                                  image: fee['image'] ?? '',
-                                                  date: fee['date'] ?? 'N/A',
-                                                  number:
-                                                      fee['number'] ?? 'N/A',
-                                                  price: fee['price'] ?? 'N/A',
-                                                  repay: fee['repay'] ?? false,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                              height: AppDimensions.gapSmall),
-                                        ],
-                                      );
-                                    }).toList(),
-                                  ),
-                                ),
+  stream: FirestoreService.getUserFeesStream(),
+  builder: (context, snapshot) {
+    if (snapshot.connectionState == ConnectionState.waiting) {
+      return const CircularProgressIndicator(
+        color: ColorStyles.blackColor,
+      );
+    }
+
+    if (snapshot.hasError) {
+      return Text(
+        'Erreur : ${snapshot.error}',
+        style: TextStyles.body,
+      );
+    }
+
+    if (!snapshot.hasData || snapshot.data!.isEmpty) {
+      return Text(
+        'Aucun frais trouvé',
+        style: TextStyles.body,
+      );
+    }
+
+    // Affichage de la liste des frais récupérés de Firestore (déjà triée)
+    return Expanded(
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: snapshot.data!.length,
+        itemBuilder: (context, index) {
+          final fee = snapshot.data![index];
+          return Column(
+            children: [
+              ShowFeesButton(
+                title: fee['title'] ?? 'N/A',
+                date: fee['date'] ?? 'N/A',
+                price: fee['price'] ?? 'N/A',
+                repay: fee['repay'] ?? false,
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ShowFeesScreen(
+                      documentId: fee['id'] ?? '',
+                      title: fee['title'] ?? 'N/A',
+                      image: fee['image'] ?? '',
+                      date: fee['date'] ?? 'N/A',
+                      number: fee['number'] ?? 'N/A',
+                      price: fee['price'] ?? 'N/A',
+                      repay: fee['repay'] ?? false,
+                    ),
+                  ),
                 ),
+              ),
+              const SizedBox(height: AppDimensions.gapSmall),
+            ],
+          );
+        },
+      ),
+    );
+  },
+)
+
               ],
             ),
           ),
