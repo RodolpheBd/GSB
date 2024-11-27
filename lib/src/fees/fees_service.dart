@@ -51,16 +51,25 @@ class _FeesState extends State<Fees> {
                     )
                   : ImageService.displayImage(_selectedImage!),
               const SizedBox(height: AppDimensions.gapSmall),
+              
               GestureDetector(
-                onTap: () => CalendarService.showDatePickerDialog(
-                  context,
-                  onDateSelected: (DateTime selectedDate) {
-                    CalendarService.updateSelectedDate(selectedDate);
-                    setState(() => _dateValue.text =
-                        DateFormat('dd-MM-yyyy').format(selectedDate));
-                    Navigator.of(context).pop();
-                  },
-                ),
+                onTap: () async {
+                  DateTime initialDate = _dateValue.text.isEmpty
+                      ? DateTime.now()
+                      : DateFormat('dd-MM-yyyy').parse(_dateValue.text);
+
+                  await CalendarService().showDatePickerDialog(
+                    context: context,
+                    selectedDay: initialDate,
+                    focusedDay: DateTime.now(),
+                    onDateSelected: (DateTime selectedDate) {
+                      setState(() {
+                        _dateValue.text = DateFormat('dd-MM-yyyy')
+                            .format(selectedDate);
+                      });
+                    },
+                  );
+                },
                 child: AbsorbPointer(
                   child: CustomTextInput(
                     controller: _dateValue,

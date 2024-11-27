@@ -24,10 +24,10 @@ class CustomTextInput extends StatelessWidget {
           obscureText: showObscureText ?? false,
           decoration: InputDecoration(
             hintText: placeholder,
-            hintStyle: TextStyles.body,
+            hintStyle: AppTextStyles.body,
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                color: ColorStyles.blackColor,
+                color: AppColors.blackColor,
                 width: AppDimensions.borderThickness,
               ),
               borderRadius:
@@ -35,7 +35,7 @@ class CustomTextInput extends StatelessWidget {
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                color: ColorStyles.blackColor,
+                color: AppColors.blackColor,
                 width: AppDimensions.borderThickness,
               ),
               borderRadius:
@@ -43,7 +43,7 @@ class CustomTextInput extends StatelessWidget {
             ),
             suffixIcon: suffixIcon,
           ),
-          style: TextStyles.body,
+          style: AppTextStyles.body,
         ),
       );
 }

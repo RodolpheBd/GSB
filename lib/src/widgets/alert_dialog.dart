@@ -17,7 +17,7 @@ class AlertDialogWidget extends StatelessWidget {
             width: AppDimensions.alertDialogWidth,
             height: AppDimensions.alertDialogHeight,
             decoration: BoxDecoration(
-              color: ColorStyles.whiteColor,
+              color: AppColors.whiteColor,
               borderRadius:
                   BorderRadius.circular(AppDimensions.borderRadiusSmall),
             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:gsb/src/imports.dart';
 import 'package:gsb/src/widgets/widgets.dart';
 import 'package:gsb/src/common/common.dart';
@@ -34,12 +35,17 @@ class _ShowFeesServiceState extends State<ShowFeesService> {
   bool _isLoadingValidate = false;
   bool _isLoadingDelete = false;
 
+  DateTime _selectedDay = DateTime.now();
+  DateTime _focusedDay = DateTime.now();
+
   @override
   void initState() {
     super.initState();
     _dateValue.text = widget.date;
     _numberValue.text = widget.number;
     _priceValue.text = widget.price;
+    _selectedDay = DateFormat('dd-MM-yyyy').parse(widget.date);
+    _focusedDay = _selectedDay;
   }
 
   @override
@@ -48,10 +54,10 @@ class _ShowFeesServiceState extends State<ShowFeesService> {
           showBackArrow: true,
           title: widget.title,
           backgroundColor:
-              widget.repay ? ColorStyles.greenColor : ColorStyles.redColor,
+              widget.repay ? AppColors.greenColor : AppColors.redColor,
         ),
         body: Container(
-          color: widget.repay ? ColorStyles.greenColor : ColorStyles.redColor,
+          color: widget.repay ? AppColors.greenColor : AppColors.redColor,
           child: Center(
             child: Column(
               children: [
@@ -71,9 +77,27 @@ class _ShowFeesServiceState extends State<ShowFeesService> {
                       )
                     : const SizedBox(),
                 const SizedBox(height: AppDimensions.gapSmall),
-                CustomTextInput(
-                  controller: _dateValue,
-                  placeholder: 'Saisir date',
+                GestureDetector(
+                  onTap: () async =>
+                      await CalendarService().showDatePickerDialog(
+                    context: context,
+                    selectedDay: _selectedDay,
+                    focusedDay: _focusedDay,
+                    onDateSelected: (DateTime selectedDate) {
+                      setState(() {
+                        _selectedDay = selectedDate;
+                        _focusedDay = selectedDate;
+                       _dateValue.text = DateFormat('dd-MM-yyyy')
+                            .format(selectedDate);
+                      });
+                    },
+                  ),
+                  child: AbsorbPointer(
+                    child: CustomTextInput(
+                      controller: _dateValue,
+                      placeholder: "Saisir date",
+                    ),
+                  ),
                 ),
                 const SizedBox(height: AppDimensions.gapSmall),
                 CustomTextInput(
@@ -88,9 +112,8 @@ class _ShowFeesServiceState extends State<ShowFeesService> {
                 const SizedBox(height: AppDimensions.gapSmall),
                 CustomButton(
                   text: 'Valider',
-                  textColor: widget.repay
-                      ? ColorStyles.greenColor
-                      : ColorStyles.redColor,
+                  textColor:
+                      widget.repay ? AppColors.greenColor : AppColors.redColor,
                   isLoading: _isLoadingValidate,
                   onPressed: () async {
                     setState(() => _isLoadingValidate = true);
@@ -109,9 +132,8 @@ class _ShowFeesServiceState extends State<ShowFeesService> {
                 const SizedBox(height: AppDimensions.gapSmall),
                 CustomButton(
                   text: 'Supprimer',
-                  textColor: widget.repay
-                      ? ColorStyles.greenColor
-                      : ColorStyles.redColor,
+                  textColor:
+                      widget.repay ? AppColors.greenColor : AppColors.redColor,
                   isLoading: _isLoadingDelete,
                   onPressed: () async {
                     setState(() => _isLoadingDelete = true);

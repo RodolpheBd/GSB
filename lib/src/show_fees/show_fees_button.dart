@@ -24,13 +24,13 @@ class ShowFeesButton extends StatelessWidget {
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
             backgroundColor:
-                repay ? ColorStyles.greenColor : ColorStyles.redColor,
+                repay ? AppColors.greenColor : AppColors.redColor,
             elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius:
                   BorderRadius.circular(AppDimensions.borderRadiusSmall),
               side: BorderSide(
-                color: ColorStyles.blackColor,
+                color: AppColors.blackColor,
                 width: AppDimensions.borderThickness,
               ),
             ),
@@ -45,14 +45,14 @@ class ShowFeesButton extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: TextStyles.bodyBold.copyWith(
-                      color: ColorStyles.blackColor,
+                    style: AppTextStyles.bodyBold.copyWith(
+                      color: AppColors.blackColor,
                     ),
                   ),
                   Text(
                     date,
-                    style: TextStyles.bodyBold.copyWith(
-                      color: ColorStyles.blackColor,
+                    style: AppTextStyles.bodyBold.copyWith(
+                      color: AppColors.blackColor,
                     ),
                   ),
                 ],
@@ -62,8 +62,8 @@ class ShowFeesButton extends StatelessWidget {
                 children: [
                   Text(
                     price,
-                    style: TextStyles.bodyBold.copyWith(
-                      color: ColorStyles.whiteColor,
+                    style: AppTextStyles.bodyBold.copyWith(
+                      color: AppColors.whiteColor,
                     ),
                   ),
                 ],

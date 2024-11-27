@@ -1,8 +1,8 @@
 // Colors
-export 'package:gsb/src/common/assets/styles/color_styles.dart';
+export 'package:gsb/src/common/assets/styles/app_color.dart';
 
 // Text styles
-export 'package:gsb/src/common/assets/styles/text_styles.dart';
+export 'package:gsb/src/common/assets/styles/app_text_styles.dart';
 
 // Dimensions
 export 'package:gsb/src/common/constants/app_dimensions.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class TextStyles {
+class AppTextStyles {
   // Style for headers
   static const TextStyle header = TextStyle(
     fontSize: 32,

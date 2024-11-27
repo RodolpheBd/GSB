@@ -24,7 +24,7 @@ class CustomCard extends StatelessWidget {
           height: height,
           width: width,
           decoration: BoxDecoration(
-            color: ColorStyles.blackColor,
+            color: AppColors.blackColor,
             borderRadius:
                 BorderRadius.circular(AppDimensions.borderRadiusSmall),
           ),
@@ -47,8 +47,8 @@ class CustomCard extends StatelessWidget {
                         const SizedBox(height: AppDimensions.gapSmall),
                         Text(
                           text!,
-                          style: TextStyles.firstTitle
-                              .copyWith(color: ColorStyles.whiteColor),
+                          style: AppTextStyles.firstTitle
+                              .copyWith(color: AppColors.whiteColor),
                         ),
                       ],
                     )

@@ -1,38 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:gsb/src/widgets/calendar.dart';
 import 'package:gsb/src/common/common.dart';
+import 'package:gsb/src/widgets/calendar.dart';
 
 class CalendarService {
-  static DateTime selectedDay = DateTime.now();
-  static DateTime focusedDay = DateTime.now();
-
-  static String formatDate(DateTime date) => "${date.toLocal()}".split(' ')[0];
-
-  static Future<void> showDatePickerDialog(
-    BuildContext context, {
+  Future<void> showDatePickerDialog({
+    required BuildContext context,
+    required DateTime selectedDay,
+    required DateTime focusedDay,
     required Function(DateTime) onDateSelected,
   }) async =>
-      showDialog(
-        context: context,
-        builder: (_) => Dialog(
-          backgroundColor: ColorStyles.whiteColor,
-          child: SizedBox(
-            width: AppDimensions.widgetWidth,
-            height: AppDimensions.calendarHeight,
-            child: CustomCalendar(
-              selectedDay: selectedDay,
-              focusedDay: focusedDay,
-              onDateSelected: (DateTime newDate) {
-                updateSelectedDate(newDate);
-                onDateSelected(newDate);
-              },
-            ),
+    await showDialog(
+      context: context,
+      builder: (_) => Dialog(
+        backgroundColor: AppColors.whiteColor,
+        child: SizedBox(
+          width: AppDimensions.widgetWidth,
+          height: AppDimensions.calendarHeight,
+          child: CustomCalendar(
+            selectedDay: selectedDay,
+            focusedDay: focusedDay,
+            onDateSelected: (DateTime selectedDate) {
+              onDateSelected(selectedDate);
+              Navigator.of(context).pop();
+            },
           ),
         ),
-      );
-
-  static void updateSelectedDate(DateTime newDate) {
-    selectedDay = newDate;
-    focusedDay = newDate;
+      ),
+    );
   }
-}
+

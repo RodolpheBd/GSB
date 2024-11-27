@@ -19,7 +19,7 @@ class HeaderNavBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) => PreferredSize(
         preferredSize: preferredSize,
         child: Container(
-          color: backgroundColor ?? ColorStyles.whiteColor,
+          color: backgroundColor ?? AppColors.whiteColor,
           child: Padding(
             padding: EdgeInsets.only(top: AppDimensions.paddingTop),
             child: Center(
@@ -36,10 +36,10 @@ class HeaderNavBar extends StatelessWidget implements PreferredSizeWidget {
                     : null,
                 title: Text(
                   title,
-                  style: TextStyles.header,
+                  style: AppTextStyles.header,
                 ),
                 centerTitle: true,
-                backgroundColor: backgroundColor ?? ColorStyles.whiteColor,
+                backgroundColor: backgroundColor ?? AppColors.whiteColor,
               ),
             ),
           ),

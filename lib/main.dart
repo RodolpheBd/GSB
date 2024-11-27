@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'GSB',
         theme: ThemeData(
-          primaryColor: ColorStyles.whiteColor,
-          scaffoldBackgroundColor: ColorStyles.whiteColor,
+          primaryColor: AppColors.whiteColor,
+          scaffoldBackgroundColor: AppColors.whiteColor,
         ),
         home: const LoginScreen(),
       );

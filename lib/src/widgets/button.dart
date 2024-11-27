@@ -22,7 +22,7 @@ class CustomButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
-            backgroundColor: ColorStyles.blackColor,
+            backgroundColor: AppColors.blackColor,
             elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius:
@@ -33,12 +33,12 @@ class CustomButton extends StatelessWidget {
           ),
           child: (isLoading ?? false)
               ? const CircularProgressIndicator(
-                  color: ColorStyles.whiteColor,
+                  color: AppColors.whiteColor,
                 )
               : Text(
                   text,
-                  style: TextStyles.bodyBold.copyWith(
-                    color: textColor ?? ColorStyles.whiteColor,
+                  style: AppTextStyles.bodyBold.copyWith(
+                    color: textColor ?? AppColors.whiteColor,
                   ),
                 ),
         ),

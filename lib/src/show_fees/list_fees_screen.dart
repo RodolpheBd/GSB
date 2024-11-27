@@ -19,21 +19,21 @@ class ListFeesScreen extends StatelessWidget {
   builder: (context, snapshot) {
     if (snapshot.connectionState == ConnectionState.waiting) {
       return const CircularProgressIndicator(
-        color: ColorStyles.blackColor,
+        color: AppColors.blackColor,
       );
     }
 
     if (snapshot.hasError) {
       return Text(
         'Erreur : ${snapshot.error}',
-        style: TextStyles.body,
+        style: AppTextStyles.body,
       );
     }
 
     if (!snapshot.hasData || snapshot.data!.isEmpty) {
       return Text(
         'Aucun frais trouvé',
-        style: TextStyles.body,
+        style: AppTextStyles.body,
       );
     }
 
